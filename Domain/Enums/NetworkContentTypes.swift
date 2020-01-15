@@ -3,7 +3,7 @@
 //  Domain
 //
 //  Created by Behrad Kazemi on 12/17/19.
-//  Copyright © 2019 Golrang. All rights reserved.
+//  Copyright © 2019 BEKAppsDrafts. All rights reserved.
 //
 
 import Foundation

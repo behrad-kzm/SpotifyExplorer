@@ -17,8 +17,8 @@ final class NetworkProvider {
 	}
 	
 	//MARK: - Login and Authorization
-	public func makeAuthorizationNetwork() -> AuthenticationNetwork {
-		let network = Network<BaseResponse<TokenModel.Response>>(apiEndpoint)
-		return AuthenticationNetwork(network: network)
-	}    
+//	public func makeAuthorizationNetwork() -> AuthenticationNetwork {
+//		let network = Network<BaseResponse<TokenModel.Response>>(apiEndpoint)
+//		return AuthenticationNetwork(network: network)
+//	}    
 }

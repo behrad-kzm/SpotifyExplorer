@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  SpotifyExplorer
+
+  Created by Behrad Kazemi on 1/16/20.
+  Copyright © 2020 BEKApps. All rights reserved.
+*/
+
+//MARK: - Errors
+"AnErrorOccured" = "An Error Oqqurred.";
+"Error" = "Error";
+"ConnectionProblem" = "Something worng with your iternet connection";
+"UnknownError" = "Something wrong!";
+"NoInternet" = "Internet connection problem";
+"NoInternet2" = "Check your internet connection";
+
+//MARK: - Buttons
+"Continue" = "Continue";
+"Cancel" = "Cancel";
+"Accept" = "Accept";
+"Delete" = "Remove";
+"DeleteAll" = "Remove All";
+"Edit" = "Edit";
+"Save" = "Save";
+"Login" = "Login";
+"OK" = "OK";

@@ -30,7 +30,7 @@ The `Domain` is basically what is the App about and what it can do (Entities, Us
 The `Platform` is a concrete implementation of the `Domain` in a specific platform like iOS. It does hide all implementation details.
 
 #### Application
-`Application` is responsible for delivering information to the user and handling user input. It can be implemented with any delivery pattern e.g (in quiz app is MVVM). This is the place for `UIView`s and `UIViewController`s. As you will see from the quiz app, `ViewControllers` are completely independent of the `Platform`.  The only responsibility of a view controller is to "bind" the UI to the Domain to make things happen.
+`Application` is responsible for delivering information to the user and handling user input. It can be implemented with any delivery pattern e.g (in SpotifyExplorer app is MVVM). This is the place for `UIView`s and `UIViewController`s. As you will see from the SpotifyExplorer app, `ViewControllers` are completely independent of the `Platform`.  The only responsibility of a view controller is to "bind" the UI to the Domain to make things happen.
 
 ### Refrences
 * [RxSwift](https://github.com/ReactiveX/RxSwift)

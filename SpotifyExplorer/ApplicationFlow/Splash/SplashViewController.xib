@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="OKala" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="SpotifyExplorer" customModuleProvider="target">
             <connections>
                 <outlet property="launchImage" destination="jh3-Av-DgJ" id="LeH-8Z-LIW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,11 +28,19 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use headphones for better experience." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-MC-baa">
+                    <rect key="frame" x="89" y="830" width="236.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="jh3-Av-DgJ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="BSg-xM-Jar"/>
+                <constraint firstItem="eXb-MC-baa" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="PdS-3z-Wpy"/>
                 <constraint firstItem="jh3-Av-DgJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1:2" id="Uia-w6-mSz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eXb-MC-baa" secondAttribute="bottom" constant="16" id="e7U-qj-Mzd"/>
                 <constraint firstItem="jh3-Av-DgJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rTM-KT-KBl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -41,6 +48,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LaunchImage" width="500" height="500"/>
+        <image name="LaunchImage" width="1024" height="1024"/>
     </resources>
 </document>

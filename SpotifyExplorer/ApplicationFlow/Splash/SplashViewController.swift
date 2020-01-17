@@ -1,6 +1,6 @@
 //
 //  SplashViewController.swift
-//  OKala
+//  SpotifyExplorer
 //
 //  Created by Behrad Kazemi on 11/25/19.
 //  Copyright © 2019 BEKAppsDrafts. All rights reserved.

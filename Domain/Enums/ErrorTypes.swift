@@ -17,4 +17,3 @@ public enum ErrorTypes: String{
   case externalError = "ExternalError"
 }
 
-

@@ -1,6 +1,6 @@
 //
 //  Error+PopUpCover.swift
-//  OKala
+//  SpotifyExplorer
 //
 //  Created by Behrad Kazemi on 12/9/19.
 //  Copyright © 2019 BEKAppsDrafts. All rights reserved.

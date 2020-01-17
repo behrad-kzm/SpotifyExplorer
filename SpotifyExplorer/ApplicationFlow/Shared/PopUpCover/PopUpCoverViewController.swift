@@ -1,6 +1,6 @@
 //
 //  ErrorViewController.swift
-//  OKala
+//  SpotifyExplorer
 //
 //  Created by Behrad Kazemi on 12/7/19.
 //  Copyright © 2019 BEKAppsDrafts. All rights reserved.
@@ -35,7 +35,7 @@ class PopUpCoverViewController: UIViewController {
     private func setupUI(){
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
-        descriptionLabel.textColor = viewModel.appearance.getColors().titleTextColorHex.uiColor()
+        descriptionLabel.textColor = viewModel.appearance.getColors().titleTextColor
         descriptionLabel.font = viewModel.appearance.getFonts().warningText.uiFont()
         
         imageView.image = viewModel.image
@@ -45,7 +45,7 @@ class PopUpCoverViewController: UIViewController {
         }
         buttonLabel.font = viewModel.appearance.getFonts().buttonTitle.uiFont()
         buttonLabel.text = NSLocalizedString("OK", comment: "")
-        buttonLabel.textColor = viewModel.appearance.getColors().buttonTextColorHex.uiColor()
+        buttonLabel.textColor = viewModel.appearance.getColors().buttonTextColor
         mainView.layer.shadowColor = UIColor.black.cgColor
         mainView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         mainView.layer.shadowOpacity = 0.5
@@ -53,10 +53,10 @@ class PopUpCoverViewController: UIViewController {
         mainView.layer.cornerRadius = 48.0
         containerView.layer.cornerRadius = 48.0
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = viewModel.appearance.getColors().backgroundColorHex.uiColor()
-        buttonContainerView.backgroundColor = viewModel.appearance.getColors().primaryColor.uiColor()
+        containerView.backgroundColor = viewModel.appearance.getColors().backgroundColor
+        buttonContainerView.backgroundColor = viewModel.appearance.getColors().primaryColor
         titleLabel.font = viewModel.appearance.getFonts().titleHeader.uiFont()
-        titleLabel.textColor = viewModel.appearance.getColors().titleTextColorHex.uiColor()
+        titleLabel.textColor = viewModel.appearance.getColors().titleTextColor
         
         buttonContainerView.layer.cornerRadius = buttonContainerView.frame.height / 2
         buttonContainerView.clipsToBounds = true

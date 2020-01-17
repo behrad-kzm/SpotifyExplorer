@@ -10,19 +10,22 @@ import Domain
 import UIKit
 import Hero
 import BEKCurveTabbar
+
+
 final class SplashNavigator: Navigator {
 	func setup() {
 		let splashVC = SplashViewController(nibName: "SplashViewController", bundle: nil)
-        splashVC.viewModel = SplashViewModel(navigator: self, authorization: services.networkServices.getAuthorizationManager())
+        splashVC.viewModel = SplashViewModel(navigator: self/*, authorization: services.networkServices.getAuthorizationManager()*/)
 		navigationController.viewControllers = [splashVC]
+        
 	}
 	
 	func toHome() {
-        MainTabbarNavigator(services: services, navigationController: navigationController, tabbar: BEKCurveTabbarController.instantiate()).setup()
+//        MainTabbarNavigator(services: services, navigationController: navigationController, tabbar: BEKCurveTabbarController.instantiate()).setup()
 	}
     
     func toLogin(){
-        EnterPhoneNavigator(services: services, navigationController: navigationController).setup()
+        LoginNavigator(services: services, navigationController: navigationController).setup()
     }
 	
 	func toOnboarding() {

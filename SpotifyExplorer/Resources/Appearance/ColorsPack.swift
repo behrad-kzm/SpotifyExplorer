@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 public class ColorsPack{
-    
-    public let textFieldBackgroundColo: UIColor
-    public let textFieldFocusedBackgroundColor: UIColor
+
     public let backgroundColor: UIColor
     public let titleTextColor: UIColor
     public let buttonTextColor: UIColor

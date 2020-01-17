@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1376D9A823D0A8FB00EE9114 /* SpotifyProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9A723D0A8FB00EE9114 /* SpotifyProxy.swift */; };
 		1376D9AE23D19DEE00EE9114 /* AppRemoteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9AD23D19DEE00EE9114 /* AppRemoteDelegate.swift */; };
 		1376D9B023D19E0200EE9114 /* SessionManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9AF23D19E0200EE9114 /* SessionManagerDelegate.swift */; };
 		1376D9B323D1A9AF00EE9114 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9B223D1A9AF00EE9114 /* LoginUseCase.swift */; };
@@ -179,7 +178,6 @@
 
 /* Begin PBXFileReference section */
 		0672DAB2D8A185978E22F684 /* Pods_NetworkPlatform_NetworkPlatformTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkPlatform_NetworkPlatformTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1376D9A723D0A8FB00EE9114 /* SpotifyProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyProxy.swift; sourceTree = "<group>"; };
 		1376D9AD23D19DEE00EE9114 /* AppRemoteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRemoteDelegate.swift; sourceTree = "<group>"; };
 		1376D9AF23D19E0200EE9114 /* SessionManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerDelegate.swift; sourceTree = "<group>"; };
 		1376D9B223D1A9AF00EE9114 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
@@ -527,7 +525,6 @@
 			isa = PBXGroup;
 			children = (
 				13D77D7523CFBB0300A08683 /* Vibrator.swift */,
-				1376D9A723D0A8FB00EE9114 /* SpotifyProxy.swift */,
 				1376D9BE23D2211A00EE9114 /* AppProxy.swift */,
 			);
 			path = Tools;
@@ -1344,7 +1341,6 @@
 				13D77D7223CFBAB200A08683 /* ActivityIndicator.swift in Sources */,
 				13D77D3623CFAF1700A08683 /* FontModel.swift in Sources */,
 				13D77D3F23CFB0CF00A08683 /* UIView+RemoveSubviews.swift in Sources */,
-				1376D9A823D0A8FB00EE9114 /* SpotifyProxy.swift in Sources */,
 				13D77D5923CFB72D00A08683 /* Navigator.swift in Sources */,
 				13D77D3423CFADDC00A08683 /* AppearanceProvider.swift in Sources */,
 				13D77D7623CFBB0300A08683 /* Vibrator.swift in Sources */,

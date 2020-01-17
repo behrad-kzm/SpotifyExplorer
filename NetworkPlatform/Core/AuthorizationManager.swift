@@ -15,8 +15,8 @@ public class AuthorizationManager: Domain.AuthorizationManager {
     
     public private(set) var status = AuthenticationStatus.notDetermined 
     private var statusSubject = BehaviorSubject<AuthenticationStatus>.init(value: .notDetermined)
-    private let clientID = "ba05b9cd59634cefa8493ac961d76ed6"
-    private let secret = "80b7235a88264654a105a989f6775a59"
+    private let clientID = "249534df82014ae4a07a49958dcd5948"
+    private let secret = "3ec1d685136c4fad9c2b4f0675df8c79"
     
     public static let shared: AuthorizationManager = {
         let auth = AuthorizationManager()
@@ -25,7 +25,7 @@ public class AuthorizationManager: Domain.AuthorizationManager {
             auth.accessToken = retrievedToken
 
         }
-        let redirectURL = URL(string: "spotifyExplorer://")!
+        let redirectURL = URL(string: "spotifyexplorer://")!
         SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
         auth.accessToken = String()
         return auth
@@ -76,6 +76,7 @@ public class AuthorizationManager: Domain.AuthorizationManager {
 }
 extension AuthorizationManager: Domain.AppProxyProtocol {
     public func authorize(withURL url: URL) throws {
+        
         let result = SpotifyLogin.shared.applicationOpenURL(url) { (error) in
             //            [TODO] handle authorize if fails
         }

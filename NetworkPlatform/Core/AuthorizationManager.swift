@@ -15,14 +15,18 @@ public class AuthorizationManager: Domain.AuthorizationManager {
     
     public private(set) var status = AuthenticationStatus.notDetermined 
     private var statusSubject = BehaviorSubject<AuthenticationStatus>.init(value: .notDetermined)
+    private let clientID = "ba05b9cd59634cefa8493ac961d76ed6"
+    private let secret = "80b7235a88264654a105a989f6775a59"
     
     public static let shared: AuthorizationManager = {
         let auth = AuthorizationManager()
         if let retrievedToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue), retrievedToken != ""{
             auth.status = .authorized
             auth.accessToken = retrievedToken
-            return auth
+
         }
+        let redirectURL = URL(string: "spotifyExplorer://")!
+        SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
         auth.accessToken = String()
         return auth
     }()

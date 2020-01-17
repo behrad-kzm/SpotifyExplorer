@@ -12,11 +12,11 @@ import RxSwift
 public protocol AuthorizationManager {
     
     var status: AuthenticationStatus { get }
-    var uuid: String! { get }
     var accessToken: String! { get }
-    var refreshToken: String! { get }
-
-    func LogOut(completion: @escaping ()->())
-    
+    func getStatusAsObservable() -> Observable<AuthenticationStatus>    
+    func tokenExpirationHandler(response: HTTPURLResponse)
+    func update(token: String)
+    func logOut(completion: @escaping ()->())
+    func proxy() -> AppProxyProtocol
     func getNewToken() -> Observable<Bool>
 }

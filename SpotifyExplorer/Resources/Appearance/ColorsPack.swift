@@ -24,7 +24,7 @@ public class ColorsPack{
         self.titleTextColor = UIColor.systemGray
         self.buttonTextColor = UIColor(hex: Appearance.Colors.white.highest.rawValue, alpha: 1)
         self.subtitleTextColor = UIColor.label
-        self.primaryColor = UIColor(hex: Appearance.Colors.yellow.highest.rawValue, alpha: 1)
+        self.primaryColor = UIColor(hex: Appearance.Colors.green.highest.rawValue, alpha: 1)
         self.placeHolderTextColor = UIColor.systemGray
         self.errorColor = UIColor(hex: Appearance.Colors.red.pinky.rawValue, alpha: 1)
         self.shadowColor = UIColor.black

@@ -12,20 +12,15 @@ import Domain
 public final class UseCaseProvider: Domain.NetworkUseCaseProvider {
 
     private let networkProvider: NetworkProvider
-    private let spotifyAPI: SpotifyAPIProxy
-    public init(spotifyAPI: SpotifyAPIProxy) {
+    public init() {
         networkProvider = NetworkProvider()
-        self.spotifyAPI = spotifyAPI
+
     }
-    
-    //MARK: - Get Token + Login
     public func getAuthorizationManager() -> Domain.AuthorizationManager {
         return AuthorizationManager.shared
     }
-//    public func makeSetPhoneNumberUseCase() -> Domain.SetPhoneNumberUseCase {
-//        return SetPhoneNumberUseCase(network: networkProvider.makeSetPhoneNetwork())
-//    }
-//    public func makeVerifyPhoneUseCase() -> Domain.VerifyPhoneNumberUseCase {
-//        return VerifyPhoneNumberUseCase(network: networkProvider.makeVerifyNetwork(), manager: AuthorizationManager.shared)
-//    }
+    public func getLoginUseCases() -> Domain.LoginUseCase {
+        return LoginUseCase(handler: getAuthorizationManager())
+    }
+    
 }

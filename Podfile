@@ -16,6 +16,7 @@ target 'NetworkPlatform' do
     pod 'RxCocoa'
     pod 'Alamofire'
     pod 'RxAlamofire'
+    pod 'SpotifyLogin', '~> 0.1'
   # Pods for NetworkPlatform
 
   target 'NetworkPlatformTests' do
@@ -29,6 +30,7 @@ target 'SpotifyExplorer' do
   use_frameworks!
       pod 'RxCocoa'
       pod 'RxSwift'
+      pod 'SpotifyLogin', '~> 0.1'
       #UIPods
       pod 'IQKeyboardManagerSwift'
       pod 'RxDataSources'

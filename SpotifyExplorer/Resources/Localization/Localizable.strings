@@ -7,12 +7,13 @@
 */
 
 //MARK: - Errors
-"AnErrorOccured" = "An Error Oqqurred.";
+"AnErrorOccured" = "An error oqqurred.";
 "Error" = "Error";
 "ConnectionProblem" = "Something worng with your iternet connection";
 "UnknownError" = "Something wrong!";
 "NoInternet" = "Internet connection problem";
-"NoInternet2" = "Check your internet connection";
+"UserDidNotGrantAccess" = "User did not grant access to spotify.";
+
 
 //MARK: - Buttons
 "Continue" = "Continue";
@@ -22,5 +23,5 @@
 "DeleteAll" = "Remove All";
 "Edit" = "Edit";
 "Save" = "Save";
-"Login" = "Login";
+"Login" = "Login with Spotify";
 "OK" = "OK";

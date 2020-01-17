@@ -12,9 +12,10 @@ final class ApplicationPlatformInjector {
     
     static let shared = ApplicationPlatformInjector()
     private let package: ServicePackage
-    private(set) var spotifyHandler = SpotifyProxy()
+    private(set) var spotifyHandler: AppProxyProtocol!
     private init() {        
-        self.package = ServicePackage(networkServices: NetworkPlatform.UseCaseProvider(spotifyAPI: spotifyHandler), appearance: AppearanceProvider())
+        self.package = ServicePackage(networkServices: NetworkPlatform.UseCaseProvider(), appearance: AppearanceProvider())
+        self.spotifyHandler = package.networkServices.getAuthorizationManager().proxy()
     }
     
     func setup(with window: UIWindow) {

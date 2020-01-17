@@ -17,10 +17,10 @@ final class Network<T: Decodable> {
     private let endPoint: String
     private let scheduler: ConcurrentDispatchQueueScheduler
     private var tokenString: String {
-        return "Bearer " /*+ AuthorizationManager.shared.accessToken*/
+        return "Bearer " + AuthorizationManager.shared.accessToken
     }
     private var sharedHeaders: Dictionary<String,String> {
-        if /*AuthorizationManager.shared.accessToken.isEmpty*/ true {
+        if AuthorizationManager.shared.accessToken.isEmpty {
             return [:]
         }
             return ["Authorization" : tokenString]
@@ -47,6 +47,9 @@ final class Network<T: Decodable> {
                     } catch {
                         throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
                     }
+                }else if 401 == json.0.statusCode {
+                    print("TOKEN EXPIRED")
+                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
@@ -68,16 +71,14 @@ final class Network<T: Decodable> {
                         let data = json.1
                         let decoder = JSONDecoder()
                         decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-                        
                         return try decoder.decode(T.self, from: data)
-                        //            return try JSONDecoder().decode(T.self, from: json.1)
                     } catch let err {
                         print(String(bytes: json.1, encoding: .utf8) ?? "")
                         throw self.handle(error: err, data: json.1, StatusCode: json.0.statusCode)
                     }
                 }else if 401 == json.0.statusCode {
                     print("TOKEN EXPIRED")
-                    /*AuthorizationManager.shared.tokenExpirationHandler(response: json.0)*/
+                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
@@ -102,6 +103,9 @@ final class Network<T: Decodable> {
                     } catch {
                         throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
                     }
+                }else if 401 == json.0.statusCode {
+                    print("TOKEN EXPIRED")
+                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })

@@ -11,7 +11,7 @@ import Foundation
 public protocol NetworkUseCaseProvider {
     
     //MARK: - Get Token + Login
-//    func getAuthorizationManager() -> AuthorizationManager
-//    func makeSetPhoneNumberUseCase() -> SetPhoneNumberUseCase
-//    func makeVerifyPhoneUseCase() -> VerifyPhoneNumberUseCase
+    func getAuthorizationManager() -> AuthorizationManager
+    func getLoginUseCases() -> LoginUseCase
+
 }

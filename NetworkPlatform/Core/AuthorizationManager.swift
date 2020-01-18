@@ -23,7 +23,7 @@ public class AuthorizationManager: Domain.AuthorizationManager {
         let redirectURL = URL(string: "spotifyexplorer://")!
         SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
         
-        if let retrievedToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue), retrievedToken != ""{
+        if let retrievedToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue), !retrievedToken.isEmpty{
             auth.status = .authorized
             auth.accessToken = retrievedToken
             auth.getNewToken()

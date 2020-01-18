@@ -1,9 +1,9 @@
 //
-//  LoginViewModel.swift
+//  ArtistDetailsViewModel.swift
 //  SpotifyExplorer
 //
-//  Created by Behrad Kazemi on 11/21/19.
-//  Copyright © 2019 BEKAppsDrafts. All rights reserved.
+//  Created by Behrad Kazemi on 1/18/20.
+//  Copyright © 2020 BEKApps. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Domain
 import SpotifyLogin
-final class LoginViewModel: ViewModelType {
+final class ArtistDetailsViewModel: ViewModelType {
     
     let navigator: LoginNavigator
     private let networkServices: LoginUseCase
@@ -28,7 +28,6 @@ final class LoginViewModel: ViewModelType {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         let action = networkServices.listenToLogin().do(onNext: { [navigator](loggedIn) in
-            
             if !loggedIn {
                 let error = NSError(domain: "Acces denied", code: 401, userInfo: ["message": NSLocalizedString("UserDidNotGrantAccess", comment: "")])
                 navigator.prepareFor(error: error)
@@ -42,10 +41,11 @@ final class LoginViewModel: ViewModelType {
         navigator.toHome()
     }
 }
-extension LoginViewModel {
+extension ArtistDetailsViewModel {
     struct Input {
         let loginTrigger: Driver<Void>
     }
+    
     struct Output {
         let isFetching: Driver<Bool>
         let action: Driver<Void>

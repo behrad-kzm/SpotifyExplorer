@@ -9,7 +9,7 @@
 import UIKit
 import Domain
 import BEKMultiCellTable
-
+import SDWebImage
 class FollowedUsersCell: UITableViewCell {
 
     @IBOutlet weak var shadowMaskView: UIView!
@@ -44,7 +44,7 @@ extension FollowedUsersCell: BEKBindableCell {
     func bindData(withViewModel viewModel: FollowedUsersItemViewModel) {
         titleLabel.text = viewModel.title
         if let url = URL(string: viewModel.profileImagePath) {
-            profileImageView.load(url: url)
+            profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "ArtistPlaceHolder"), options: [.continueInBackground], completed: nil)
             return
         }
         profileImageView.image = UIImage(named: "ArtistPlaceHolder")

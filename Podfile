@@ -32,6 +32,7 @@ target 'SpotifyExplorer' do
       pod 'RxSwift'
       pod 'SpotifyLogin', '~> 0.1'
       #UIPods
+      pod 'SDWebImage', '~> 5.0'
       pod 'IQKeyboardManagerSwift'
       pod 'RxDataSources'
       pod 'Hero'

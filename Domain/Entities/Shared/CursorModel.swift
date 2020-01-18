@@ -8,5 +8,5 @@
 
 import Foundation
 public struct CursorModel: Codable {
-    let after: String
+    public let after: String?
 }

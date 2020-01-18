@@ -10,6 +10,7 @@ import UIKit
 import Stellar
 import RxSwift
 import RxCocoa
+import Lottie
 import SpotifyLogin
 class LoginViewController: UIViewController {
     var viewModel: LoginViewModel!
@@ -23,8 +24,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var sendStack: UIStackView!
     @IBOutlet weak var changeLanguageButton: UIButton!
     @IBOutlet weak var changeButtonContainer: UIView!
+    @IBOutlet weak var splashView: UIView!
+    @IBOutlet weak var lottieAnimationContainer: UIView!
     var loginButton: UIButton!
-    
+    private var animation: AnimationView!
+    let animationSpeed = 1.0
     let disposeBag = DisposeBag()
     //MARK:- LifeCycle
     override func viewDidLoad() {
@@ -43,6 +47,7 @@ class LoginViewController: UIViewController {
         loadAnimations()
     }
     private func setupUI(){
+        splashView.alpha = 0
         sendLabel.isHidden = true
         sendLabel.textColor = viewModel.appearance.getColors().buttonTextColor
         buttonContainer.alpha = 0
@@ -61,6 +66,30 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonClicked(_ sender: Any) {
         loginButton.sendActions(for: .touchUpInside)
     }
+    func animateVerified(){
+        animation = AnimationView()
+        lottieAnimationContainer.removeSubviews()
+        lottieAnimationContainer.isHidden = false
+        self.splashView.makeAlpha(1).duration(0.3 * self.animationSpeed).completion {
+            self.animation = AnimationView(name: "Verified")
+            self.lottieAnimationContainer.contentMode = .scaleAspectFit
+            self.lottieAnimationContainer.addSubview(self.animation)
+            self.animation.frame = self.lottieAnimationContainer.bounds
+            self.animation.loopMode = .playOnce
+            self.animation.play(fromProgress: AnimationProgressTime(exactly: 0.0), toProgress: AnimationProgressTime(0.83), loopMode: .playOnce) { (finished) in
+                AppSoundEffects().playVerifySound()
+                Vibrator.vibrate(hardness: 2)
+                self.animation.play(fromProgress: AnimationProgressTime(exactly: 0.83), toProgress: AnimationProgressTime(1.0), loopMode: .playOnce) { (finished) in
+                    if finished{
+                        self.viewModel.verified()
+                    }
+                }
+            }
+        }.animate()
+        
+        
+    }
+    
     private func loadAnimations(){
         spotifyExplorerImageView.moveY(-20).duration(0).then().delay(0.3).moveY(20).makeAlpha(1).duration(0.5).animate()
         showButtonAnimation()
@@ -85,7 +114,11 @@ class LoginViewController: UIViewController {
     private func bindData(){
         let input = LoginViewModel.Input(loginTrigger: loginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        [output.action.drive(), output.isFetching.do(onNext: { [ loginButton, indicator, sendLabel](fetching) in
+        [output.action.do(onNext: { () in
+            DispatchQueue.main.async {
+                self.animateVerified()
+            }
+        }).drive(), output.isFetching.do(onNext: { [ loginButton, indicator, sendLabel](fetching) in
             DispatchQueue.main.async {
                 if loginButton?.isUserInteractionEnabled ?? false {
                     UIView.animate(withDuration: 0.5,

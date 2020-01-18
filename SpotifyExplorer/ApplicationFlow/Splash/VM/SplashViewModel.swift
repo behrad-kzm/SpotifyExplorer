@@ -24,7 +24,6 @@ final class SplashViewModel {
             navigator.toHome()
             return
         }
-        
         navigator.toLogin()
     }
 }

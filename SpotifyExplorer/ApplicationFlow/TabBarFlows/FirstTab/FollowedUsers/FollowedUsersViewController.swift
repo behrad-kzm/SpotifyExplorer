@@ -57,7 +57,14 @@ class FollowedUsersViewController: UIViewController {
     }
     
     private func bindData(){
-        let input = FollowedUsersViewModel.Input(selectedItem: artistsTableView.rx.itemSelected.asDriver())
+        let input = FollowedUsersViewModel.Input(selectedItem: artistsTableView.rx.itemSelected.asDriver(), bottomOffset: artistsTableView.rx.contentOffset.map{ [artistsTableView] (point) in
+            if let safeContentHeight = artistsTableView?.contentSize.height, let safeHeight = artistsTableView?.frame.height {
+                let safeOffset = point.y > 0 ? point.y : CGFloat(0.0)
+                let result = safeContentHeight - (safeOffset + safeHeight)
+                return result > 0 ? result : CGFloat(0.0)
+            }
+            return CGFloat(0.0)
+            }.skip(3).distinctUntilChanged())
         let output = viewModel.transform(input: input)
         [output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
             artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<FollowedUsersCell>(viewModel: $0)})

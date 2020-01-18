@@ -13,10 +13,14 @@ public struct FollowedUsersItemViewModel {
     let artist: ArtistModel
     let profileImagePath: String
     let title: String
+    let genre: String
     
     init(model: ArtistModel) {
         self.artist = model
         self.title = model.name
+        self.genre = model.genres.reduce("", { (previous, item) -> String in
+            return "\(previous) - \(item)"
+        })
         if let safeURL = model.images.first?.url {
             self.profileImagePath = safeURL
             return

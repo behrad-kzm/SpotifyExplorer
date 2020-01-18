@@ -13,7 +13,7 @@
 "UnknownError" = "Something wrong!";
 "NoInternet" = "Internet connection problem";
 "UserDidNotGrantAccess" = "User did not grant access to spotify.";
-
+"Forbidden" = "Access Denied! make sure your VPN is connected.";
 
 //MARK: - Buttons
 "Continue" = "Continue";

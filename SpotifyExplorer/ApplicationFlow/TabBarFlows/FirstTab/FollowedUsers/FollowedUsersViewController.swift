@@ -17,14 +17,9 @@ class FollowedUsersViewController: UIViewController {
     var viewModel: FollowedUsersViewModel!
 
     //MARK:- Outlets
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var spotifyExplorerImageView: UIImageView!
-    @IBOutlet weak var buttonContainer: UIView!
-    @IBOutlet weak var sendLabel: UILabel!
-    @IBOutlet weak var sendStack: UIStackView!
-    @IBOutlet weak var changeLanguageButton: UIButton!
-    @IBOutlet weak var changeButtonContainer: UIView!
+    @IBOutlet weak var headerBlurView: UIVisualEffectView!
+    @IBOutlet weak var headerContainer: UIView!
+
     var loginButton: UIButton!
     
     let disposeBag = DisposeBag()
@@ -43,17 +38,13 @@ class FollowedUsersViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        loadAnimations()
-    }
-    private func loadAnimations(){
-//        spotifyExplorerImageView.moveY(-20).duration(0).then().delay(0.3).moveY(20).makeAlpha(1).duration(0.5).animate()
-//        showButtonAnimation()
     }
     private func setupUI(){
         artistsTableView.rowHeight = 80
         
     }
     private func setupSizes(){
+        artistsTableView.contentInset = UIEdgeInsets(top: artistsTableView.contentInset.top + headerContainer.bounds.height, left: artistsTableView.contentInset.left, bottom: artistsTableView.contentInset.bottom, right: artistsTableView.contentInset.right)
     }
     
     private func bindData(){
@@ -66,7 +57,7 @@ class FollowedUsersViewController: UIViewController {
             return CGFloat(0.0)
             }.skip(3).distinctUntilChanged())
         let output = viewModel.transform(input: input)
-        [output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
+        [output.error.drive(), output.isFetching.drive(), output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
             artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<FollowedUsersCell>(viewModel: $0)})
         })].forEach { (item) in
             item.disposed(by: disposeBag)

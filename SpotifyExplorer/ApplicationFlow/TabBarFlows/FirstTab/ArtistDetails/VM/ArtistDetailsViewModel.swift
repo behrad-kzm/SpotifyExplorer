@@ -21,8 +21,8 @@ final class ArtistDetailsViewModel: ViewModelType {
         self.networkServices = networkServices
         self.appearance = appearance
     }
-    func getLoginScops() -> [Scope] {
-        return networkServices.loginScopes().compactMap{ Scope.init(rawValue: $0) }
+    func getAlbums()  {
+//        return networkServices.loginScopes().compactMap{ Scope.init(rawValue: $0) }
     }
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()
@@ -37,9 +37,7 @@ final class ArtistDetailsViewModel: ViewModelType {
         let errors = errorTracker.asDriver()
         return Output(isFetching: fetching, action: action, error: errors)
     }
-    func verified(){
-        navigator.toHome()
-    }
+
 }
 extension ArtistDetailsViewModel {
     struct Input {

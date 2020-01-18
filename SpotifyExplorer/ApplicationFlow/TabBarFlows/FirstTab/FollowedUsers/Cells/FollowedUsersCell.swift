@@ -16,6 +16,7 @@ class FollowedUsersCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -43,6 +44,7 @@ extension FollowedUsersCell: BEKBindableCell {
     typealias ViewModelType = FollowedUsersItemViewModel
     func bindData(withViewModel viewModel: FollowedUsersItemViewModel) {
         titleLabel.text = viewModel.title
+        genreLabel.text = viewModel.genre
         if let url = URL(string: viewModel.profileImagePath) {
             profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "ArtistPlaceHolder"), options: [.continueInBackground], completed: nil)
             return

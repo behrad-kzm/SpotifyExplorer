@@ -34,13 +34,14 @@ final class FollowedUsersViewModel: ViewModelType {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         
-
         let loadMore = input.bottomOffset.filter{ $0 == 0.0 }.startWith(0.0).withLatestFrom(requestStream).distinctUntilChanged().flatMapLatest { [unowned self](requestItem) -> Observable<[FollowedUsersItemViewModel]> in
             self.loadMoreItems(request: requestItem).map{ $0.compactMap{ FollowedUsersItemViewModel(model: $0)}}
-        }
+            }.trackError(errorTracker).trackActivity(activityIndicator)
         
         let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
+        let errors = errorTracker.asDriver().do(onNext: { [navigator](error) in
+            navigator.prepareFor(error: error)
+        })
         return Output(isFetching: fetching, newItems: loadMore, error: errors)
     }
 }

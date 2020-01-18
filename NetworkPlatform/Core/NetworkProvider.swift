@@ -20,4 +20,9 @@ final class NetworkProvider {
         let network =  Network<FollowedArtistsNetworkModel.Response>(apiEndpoint)
         return FollowedArtistsAPI(network: network)
 	}
+    
+    public func makeArtistsAlbumNetwork(artist: ArtistModel) -> ArtistsAlbumAPI {
+        let network =  Network<ArtistAlbumsNetworkModel.Response>(apiEndpoint)
+        return ArtistsAlbumAPI(network: network, forArtist: artist)
+    }
 }

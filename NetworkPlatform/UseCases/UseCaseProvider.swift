@@ -25,4 +25,7 @@ public final class UseCaseProvider: Domain.NetworkUseCaseProvider {
     public func getFollowedUsersUseCases() -> Domain.FollowedArtistsUseCase {
         return FollowedArtistsUseCase(network: networkProvider.makeFollowedUsersNetwork())
     }
+    public func getArtistsAlbumUseCases(forArtist artist: ArtistModel) -> Domain.ArtistsAlbumUseCase {
+        return ArtistsAlbumUseCase(network: networkProvider.makeArtistsAlbumNetwork(artist: artist))
+    }
 }

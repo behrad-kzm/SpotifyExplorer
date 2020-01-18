@@ -17,6 +17,8 @@ extension Error {
         switch error.code {
         case -1004:
             descriptionText = NSLocalizedString("ConnectionProblem", comment: "")
+        case 403:
+            descriptionText = NSLocalizedString("Forbidden", comment: "")
         default:
             descriptionText = error.userInfo["message"] as? String ?? NSLocalizedString("UnknownError", comment: "")
         }

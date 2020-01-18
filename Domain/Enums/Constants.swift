@@ -27,5 +27,6 @@ public enum Constants {
 		case defaultBaseUrl = "https://api.spotify.com/v1/"
 		
         case followedArtists = "me/following"
+        case artistsAlbum = "artists/"
 	}
 }

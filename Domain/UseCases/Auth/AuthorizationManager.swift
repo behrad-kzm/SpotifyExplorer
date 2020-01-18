@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import RxSwift
 public protocol AuthorizationManager {
     
     var status: AuthenticationStatus { get }

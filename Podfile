@@ -37,6 +37,7 @@ target 'SpotifyExplorer' do
       pod 'Hero'
       pod 'Stellar', :git => 'https://github.com/AugustRush/Stellar.git'
       pod 'BEKCurveTabbar', :git => 'https://github.com/behrad-kzm/BEKCurveTabbar.git'
+      pod 'BEKMultiCellTable', :git => 'https://github.com/behrad-kzm/BEKMultiCellTable.git'
       pod 'lottie-ios'
   # Pods for SpotifyExplorer
 

@@ -9,13 +9,13 @@
 import Foundation
 public struct ArtistModel: Codable {
     
-    let followers: FollowersModel
-    let genres: [String]
-    let href: String
-    let id: String
-    let images: [ImageModel]
-    let name: String
-    let popularity: UInt
-    let type: String
-    let uri: String
+   public  let followers: FollowersModel
+   public  let genres: [String]
+   public  let href: String
+   public  let id: String
+   public  let images: [ImageModel]
+   public  let name: String
+   public  let popularity: UInt
+   public  let type: String
+   public  let uri: String
 }

@@ -23,6 +23,16 @@
 		1376D9CF23D2414C00EE9114 /* FollowedArtistsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9CE23D2414C00EE9114 /* FollowedArtistsUseCase.swift */; };
 		1376D9D223D241A200EE9114 /* FollowedArtistsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9D123D241A200EE9114 /* FollowedArtistsUseCase.swift */; };
 		1376D9D623D2424900EE9114 /* FollowedArtistsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9D523D2424900EE9114 /* FollowedArtistsAPI.swift */; };
+		1376D9DC23D2CC5700EE9114 /* Dictionary+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9DB23D2CC5700EE9114 /* Dictionary+Ext.swift */; };
+		1376D9E123D2D0D900EE9114 /* FollowedUsersNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9E023D2D0D900EE9114 /* FollowedUsersNavigator.swift */; };
+		1376D9E423D2D0F000EE9114 /* FollowedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9E223D2D0EF00EE9114 /* FollowedUsersViewController.swift */; };
+		1376D9E523D2D0F000EE9114 /* FollowedUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1376D9E323D2D0EF00EE9114 /* FollowedUsersViewController.xib */; };
+		1376D9EA23D2D19700EE9114 /* FollowedUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9E823D2D19700EE9114 /* FollowedUsersCell.swift */; };
+		1376D9EB23D2D19700EE9114 /* FollowedUsersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1376D9E923D2D19700EE9114 /* FollowedUsersCell.xib */; };
+		1376D9ED23D2D23000EE9114 /* FollowedUsersItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9EC23D2D23000EE9114 /* FollowedUsersItemViewModel.swift */; };
+		1376D9EF23D2D80600EE9114 /* FollowedUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9EE23D2D80600EE9114 /* FollowedUsersViewModel.swift */; };
+		1376D9F123D2EE4A00EE9114 /* BaseErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9F023D2EE4900EE9114 /* BaseErrorModel.swift */; };
+		1376D9F323D2F1F600EE9114 /* UIImageView+load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9F223D2F1F500EE9114 /* UIImageView+load.swift */; };
 		13A61C2723CF98230045D8E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A61C2623CF98230045D8E9 /* AppDelegate.swift */; };
 		13A61C2923CF98230045D8E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A61C2823CF98230045D8E9 /* SceneDelegate.swift */; };
 		13A61C3023CF98250045D8E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A61C2F23CF98250045D8E9 /* Assets.xcassets */; };
@@ -194,6 +204,16 @@
 		1376D9CE23D2414C00EE9114 /* FollowedArtistsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedArtistsUseCase.swift; sourceTree = "<group>"; };
 		1376D9D123D241A200EE9114 /* FollowedArtistsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedArtistsUseCase.swift; sourceTree = "<group>"; };
 		1376D9D523D2424900EE9114 /* FollowedArtistsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedArtistsAPI.swift; sourceTree = "<group>"; };
+		1376D9DB23D2CC5700EE9114 /* Dictionary+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Ext.swift"; sourceTree = "<group>"; };
+		1376D9E023D2D0D900EE9114 /* FollowedUsersNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUsersNavigator.swift; sourceTree = "<group>"; };
+		1376D9E223D2D0EF00EE9114 /* FollowedUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUsersViewController.swift; sourceTree = "<group>"; };
+		1376D9E323D2D0EF00EE9114 /* FollowedUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowedUsersViewController.xib; sourceTree = "<group>"; };
+		1376D9E823D2D19700EE9114 /* FollowedUsersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUsersCell.swift; sourceTree = "<group>"; };
+		1376D9E923D2D19700EE9114 /* FollowedUsersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowedUsersCell.xib; sourceTree = "<group>"; };
+		1376D9EC23D2D23000EE9114 /* FollowedUsersItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUsersItemViewModel.swift; sourceTree = "<group>"; };
+		1376D9EE23D2D80600EE9114 /* FollowedUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedUsersViewModel.swift; sourceTree = "<group>"; };
+		1376D9F023D2EE4900EE9114 /* BaseErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseErrorModel.swift; sourceTree = "<group>"; };
+		1376D9F223D2F1F500EE9114 /* UIImageView+load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+load.swift"; sourceTree = "<group>"; };
 		13A61C2323CF98230045D8E9 /* SpotifyExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A61C2623CF98230045D8E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13A61C2823CF98230045D8E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -404,6 +424,52 @@
 			path = FollowedArtistsAPI;
 			sourceTree = "<group>";
 		};
+		1376D9DD23D2D0A300EE9114 /* FirstTab */ = {
+			isa = PBXGroup;
+			children = (
+				1376D9DE23D2D0B600EE9114 /* FollowedUsers */,
+			);
+			path = FirstTab;
+			sourceTree = "<group>";
+		};
+		1376D9DE23D2D0B600EE9114 /* FollowedUsers */ = {
+			isa = PBXGroup;
+			children = (
+				1376D9E623D2D16F00EE9114 /* Cells */,
+				1376D9DF23D2D0C400EE9114 /* VM */,
+				1376D9E023D2D0D900EE9114 /* FollowedUsersNavigator.swift */,
+				1376D9E223D2D0EF00EE9114 /* FollowedUsersViewController.swift */,
+				1376D9E323D2D0EF00EE9114 /* FollowedUsersViewController.xib */,
+			);
+			path = FollowedUsers;
+			sourceTree = "<group>";
+		};
+		1376D9DF23D2D0C400EE9114 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				1376D9EE23D2D80600EE9114 /* FollowedUsersViewModel.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		1376D9E623D2D16F00EE9114 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1376D9E723D2D17D00EE9114 /* VM */,
+				1376D9E823D2D19700EE9114 /* FollowedUsersCell.swift */,
+				1376D9E923D2D19700EE9114 /* FollowedUsersCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1376D9E723D2D17D00EE9114 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				1376D9EC23D2D23000EE9114 /* FollowedUsersItemViewModel.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 		13A61C1A23CF98220045D8E9 = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +646,7 @@
 				13D77CF023CF9F0500A08683 /* EncodableExtension.swift */,
 				13D77CEE23CF9F0500A08683 /* ResponseAnalytics.swift */,
 				1376D9B723D1ED8800EE9114 /* ObservableExtensions.swift */,
+				1376D9DB23D2CC5700EE9114 /* Dictionary+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -666,6 +733,7 @@
 				13D77D1523CFA10800A08683 /* InteractiveModelType.swift */,
 				1376D9C723D23B3D00EE9114 /* CursorModel.swift */,
 				1376D9C923D23D0800EE9114 /* ImageModel.swift */,
+				1376D9F023D2EE4900EE9114 /* BaseErrorModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -721,6 +789,7 @@
 				13D77D3B23CFB0CF00A08683 /* UIColor+Hex.swift */,
 				13D77D3C23CFB0CF00A08683 /* UIView+RemoveSubviews.swift */,
 				13D77D3A23CFB0CF00A08683 /* UIView+Shadow.swift */,
+				1376D9F223D2F1F500EE9114 /* UIImageView+load.swift */,
 			);
 			path = UIExtensions;
 			sourceTree = "<group>";
@@ -827,6 +896,7 @@
 		13D77D7E23D0473F00A08683 /* TabBarFlows */ = {
 			isa = PBXGroup;
 			children = (
+				1376D9DD23D2D0A300EE9114 /* FirstTab */,
 				13D77D7F23D0475000A08683 /* TabBarController */,
 			);
 			path = TabBarFlows;
@@ -1077,8 +1147,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D77D6323CFB7CC00A08683 /* ErrorSound.mp3 in Resources */,
+				1376D9E523D2D0F000EE9114 /* FollowedUsersViewController.xib in Resources */,
 				13D77D6223CFB7CC00A08683 /* SuccessSound.mp3 in Resources */,
 				13D77D6A23CFB83700A08683 /* Localizable.strings in Resources */,
+				1376D9EB23D2D19700EE9114 /* FollowedUsersCell.xib in Resources */,
 				13A61C3023CF98250045D8E9 /* Assets.xcassets in Resources */,
 				13D77D4923CFB34D00A08683 /* SplashViewController.xib in Resources */,
 				13D77D2923CFAC9F00A08683 /* PopUpCoverViewController.xib in Resources */,
@@ -1342,9 +1414,12 @@
 				13D77D3623CFAF1700A08683 /* FontModel.swift in Sources */,
 				13D77D3F23CFB0CF00A08683 /* UIView+RemoveSubviews.swift in Sources */,
 				13D77D5923CFB72D00A08683 /* Navigator.swift in Sources */,
+				1376D9ED23D2D23000EE9114 /* FollowedUsersItemViewModel.swift in Sources */,
+				1376D9EF23D2D80600EE9114 /* FollowedUsersViewModel.swift in Sources */,
 				13D77D3423CFADDC00A08683 /* AppearanceProvider.swift in Sources */,
 				13D77D7623CFBB0300A08683 /* Vibrator.swift in Sources */,
 				13D77D2823CFAC9F00A08683 /* PopUpCoverViewController.swift in Sources */,
+				1376D9E123D2D0D900EE9114 /* FollowedUsersNavigator.swift in Sources */,
 				13D77D8123D0476400A08683 /* MainTabbarNavigator.swift in Sources */,
 				1376D9BF23D2211A00EE9114 /* AppProxy.swift in Sources */,
 				13D77CA623CF9B8F00A08683 /* ApplicationPlatformInjector.swift in Sources */,
@@ -1355,13 +1430,16 @@
 				13D77D4723CFB34D00A08683 /* SplashNavigator.swift in Sources */,
 				13D77D5323CFB42A00A08683 /* LoginNavigator.swift in Sources */,
 				13D77D3E23CFB0CF00A08683 /* UIColor+Hex.swift in Sources */,
+				1376D9F323D2F1F600EE9114 /* UIImageView+load.swift in Sources */,
 				13D77D3223CFAD8500A08683 /* FontsPack.swift in Sources */,
 				13A61C2723CF98230045D8E9 /* AppDelegate.swift in Sources */,
 				13D77D5823CFB72D00A08683 /* MainNavigationController.swift in Sources */,
 				13D77D7323CFBAB200A08683 /* AppSoundEffects.swift in Sources */,
+				1376D9EA23D2D19700EE9114 /* FollowedUsersCell.swift in Sources */,
 				13D77D0723CFA08E00A08683 /* ServicePackage.swift in Sources */,
 				13D77D7123CFBAB200A08683 /* ErrorTracker.swift in Sources */,
 				13D77D2A23CFAC9F00A08683 /* Error+PopUpCover.swift in Sources */,
+				1376D9E423D2D0F000EE9114 /* FollowedUsersViewController.swift in Sources */,
 				13D77D7823CFBB2800A08683 /* ViewModelType.swift in Sources */,
 				13A61C2923CF98230045D8E9 /* SceneDelegate.swift in Sources */,
 				13D77D3823CFAF2C00A08683 /* FontModel+asUIFont.swift in Sources */,
@@ -1404,6 +1482,7 @@
 				13D77D1023CFA0C400A08683 /* NetworkContentTypes.swift in Sources */,
 				1376D9CC23D2404900EE9114 /* FollowersModel.swift in Sources */,
 				13D77D1123CFA0C400A08683 /* Constants.swift in Sources */,
+				1376D9F123D2EE4A00EE9114 /* BaseErrorModel.swift in Sources */,
 				13D77D1923CFA10900A08683 /* IdNameModel.swift in Sources */,
 				1376D9B623D1A9FD00EE9114 /* LoginUseCase.swift in Sources */,
 				1376D9CA23D23D0900EE9114 /* ImageModel.swift in Sources */,
@@ -1415,6 +1494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D77CFE23CFA03300A08683 /* NetworkProvider.swift in Sources */,
+				1376D9DC23D2CC5700EE9114 /* Dictionary+Ext.swift in Sources */,
 				13D77CF423CF9F0500A08683 /* DateFormatterExtension.swift in Sources */,
 				1376D9CF23D2414C00EE9114 /* FollowedArtistsUseCase.swift in Sources */,
 				1376D9BD23D1FA6D00EE9114 /* AuthorizationManager.swift in Sources */,
@@ -1613,7 +1693,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1638,7 +1718,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bekapps.SpotifyExplorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

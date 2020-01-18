@@ -8,6 +8,6 @@
 
 import Foundation
 public struct FollowersModel: Codable {
-    let href: String
-    let total: String
+   public let href: String?
+   public let total: UInt
 }

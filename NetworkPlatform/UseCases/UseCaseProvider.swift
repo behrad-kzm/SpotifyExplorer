@@ -22,5 +22,7 @@ public final class UseCaseProvider: Domain.NetworkUseCaseProvider {
     public func getLoginUseCases() -> Domain.LoginUseCase {
         return LoginUseCase(handler: getAuthorizationManager())
     }
-    
+    public func getFollowedUsersUseCases() -> Domain.FollowedArtistsUseCase {
+        return FollowedArtistsUseCase(network: networkProvider.makeFollowedUsersNetwork())
+    }
 }

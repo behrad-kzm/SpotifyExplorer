@@ -13,17 +13,17 @@ import Domain
 final class SplashViewModel {
     
     private let navigator: SplashNavigator
-//    private let authorization: AuthorizationManager
+    private let authorization: AuthorizationManager
     let scalePop: CGFloat = 0.05
-    init( navigator: SplashNavigator/*, authorization: AuthorizationManager*/) {
+    init( navigator: SplashNavigator, authorization: AuthorizationManager) {
         self.navigator = navigator
-//        self.authorization = authorization
+        self.authorization = authorization
     }
     func popLoginIfNeededOrContinue(handler: @escaping ()->()) {
-//        if authorization.status == .authorized {
-//            navigator.toHome()
-//            return
-//        }
+        if authorization.status == .authorized {
+            navigator.toHome()
+            return
+        }
         
         navigator.toLogin()
     }

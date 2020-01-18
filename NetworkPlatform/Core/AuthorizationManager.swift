@@ -20,14 +20,16 @@ public class AuthorizationManager: Domain.AuthorizationManager {
     
     public static let shared: AuthorizationManager = {
         let auth = AuthorizationManager()
+        let redirectURL = URL(string: "spotifyexplorer://")!
+        SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
+        
         if let retrievedToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue), retrievedToken != ""{
             auth.status = .authorized
             auth.accessToken = retrievedToken
-
+            auth.getNewToken()
+            return auth
         }
-        let redirectURL = URL(string: "spotifyexplorer://")!
-        SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
-        auth.accessToken = String()
+        auth.accessToken = String()        
         return auth
     }()
     
@@ -57,14 +59,12 @@ public class AuthorizationManager: Domain.AuthorizationManager {
         completion()
     }
     
-    public func getNewToken() -> Observable<Bool>{
-        
+    public func getNewToken(){        
         SpotifyLogin.shared.getAccessToken { [unowned self](token, error) in
             if let safeToken = token {
                 self.update(token: safeToken)
             }
         }
-        return statusSubject.skip(1).map{ $0 == .authorized ? true : false}
     }
     
     public func getStatusAsObservable() -> Observable<AuthenticationStatus> {
@@ -80,10 +80,11 @@ extension AuthorizationManager: Domain.AppProxyProtocol {
         let result = SpotifyLogin.shared.applicationOpenURL(url) { (error) in
             //            [TODO] handle authorize if fails
         }
-        if result == false {
+        if !result {
             let error = NSError(domain: "SpotifySDK", code: 400, userInfo: ["message": "authorization was not successful"]) as Error
             throw error
         }
+        _ = getNewToken()
     }
     
     

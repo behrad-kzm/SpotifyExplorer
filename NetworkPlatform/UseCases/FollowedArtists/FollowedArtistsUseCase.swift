@@ -15,7 +15,7 @@ public final class FollowedArtistsUseCase: Domain.FollowedArtistsUseCase  {
         self.network = network
     }
     public func load(requestParameters: FollowedArtistsNetworkModel.Request) -> Observable<FollowedArtistsNetworkModel.Response> {
-        return network.load(requestParameter: requestParameters)
+        return network.load(requestParameter: requestParameters).share(replay: 1, scope: .forever)
     }
 }
 

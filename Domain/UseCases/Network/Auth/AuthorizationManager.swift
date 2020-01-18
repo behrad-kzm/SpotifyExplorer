@@ -18,5 +18,5 @@ public protocol AuthorizationManager {
     func update(token: String)
     func logOut(completion: @escaping ()->())
     func proxy() -> AppProxyProtocol
-    func getNewToken() -> Observable<Bool>
+    func getNewToken()
 }

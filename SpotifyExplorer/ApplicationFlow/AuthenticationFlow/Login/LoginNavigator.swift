@@ -9,7 +9,7 @@
 import Foundation
 import Domain
 import RxCocoa
-
+import BEKCurveTabbar
 final class LoginNavigator: Navigator {
     
     func setup(){
@@ -21,7 +21,7 @@ final class LoginNavigator: Navigator {
         navigationController.pushViewController(loginVC, animated: true)
     }
     func toHome(){
-        print("Login Success")
-
+        let tabbar = BEKCurveTabbarController()
+        FollowedUsersNavigator(services: services, navigationController: navigationController, tabBar: tabbar).setup()
     }
 }

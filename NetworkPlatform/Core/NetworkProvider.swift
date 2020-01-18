@@ -16,9 +16,8 @@ final class NetworkProvider {
 		return endpoint
 	}
 	
-	//MARK: - Login and Authorization
-//	public func makeAuthorizationNetwork() -> AuthenticationNetwork {
-//		let network = Network<BaseResponse<TokenModel.Response>>(apiEndpoint)
-//		return AuthenticationNetwork(network: network)
-//	}    
+	public func makeFollowedUsersNetwork() -> FollowedArtistsAPI {
+        let network =  Network<FollowedArtistsNetworkModel.Response>(apiEndpoint)
+        return FollowedArtistsAPI(network: network)
+	}
 }

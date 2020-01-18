@@ -13,5 +13,6 @@ public protocol NetworkUseCaseProvider {
     //MARK: - Get Token + Login
     func getAuthorizationManager() -> AuthorizationManager
     func getLoginUseCases() -> LoginUseCase
+    func getFollowedUsersUseCases() -> FollowedArtistsUseCase
 
 }

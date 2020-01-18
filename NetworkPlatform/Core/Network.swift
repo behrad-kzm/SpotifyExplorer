@@ -55,10 +55,14 @@ final class Network<T: Decodable> {
             })
     }
     
-    func getItem(_ path: String, itemId: String = "", contentType: NetworkContentTypes = .json) -> Observable<T> {
-        let absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
+    func getItem(_ path: String, itemId: String = "", query: [String: Any] = [:], contentType: NetworkContentTypes = .json) -> Observable<T> {
+        
+        var absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
+        if !query.isEmpty {
+            absolutePath +=  "?" + query.queryString
+        }
+        let requestHeader = sharedHeaders
+        
         return RxAlamofire
             .request(.get, absolutePath, headers: requestHeader)
             .debug()
@@ -82,7 +86,6 @@ final class Network<T: Decodable> {
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
-            
     }
     func postItem(_ path: String, parameters: [String: Any], contentType: NetworkContentTypes = .json) -> Observable<T> {
         let absolutePath = endPoint + path
@@ -114,24 +117,20 @@ final class Network<T: Decodable> {
     
     func handle(error: Error, data: Data, StatusCode code: Int) -> NSError {
 			ResponseAnalytics.printError(status: code, error: error)
-        return NSError() //[TODO]
-//        do {
-//            let responseError = try JSONDecoder().decode(ResponseMessage.Base.self, from: data)
-//
-//            return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
-//        }catch{
-//            return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
-//        }
+        do {
+            let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
+            return NSError(domain: "Network", code: code, userInfo: ["responseError": responseError])
+        }catch {
+            return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
+        }
     }
     
 	func handle(data: Data, StatusCode code: Int) -> NSError {
-        return NSError() //[TODO]
-//		do {
-//			let responseError = try JSONDecoder().decode(ResponseMessage.Base.self, from: data)
-//
-//			return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
-//		}catch{
-//			return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
-//		}
+		do {
+			let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
+			return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
+		}catch{
+			return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
+		}
 	}
 }

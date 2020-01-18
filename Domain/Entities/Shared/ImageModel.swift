@@ -8,7 +8,7 @@
 
 import Foundation
 public struct ImageModel: Codable {
-    let height: UInt
-    let url: String
-    let width: UInt
+   public let height: UInt
+   public let url: String
+   public let width: UInt
 }

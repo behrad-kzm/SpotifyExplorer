@@ -10,21 +10,27 @@ import Foundation
 public enum FollowedArtistsNetworkModel: InteractiveModelType {
     
     public struct Response: Codable {
-        let artists: ArtistsListResponseModel
+        public let artists: ArtistsListResponseModel
     }
     
     public struct Request: Codable {
+
         let type = "artist"
         let limit: UInt
         let after: String
+        
+        public init (limit: UInt, after: String) {
+            self.limit = limit
+            self.after = after
+        }
     }
     
     public struct ArtistsListResponseModel: Codable {
-        let items: [ArtistModel]
-        let next: String
-        let total: UInt
-        let cursors: CursorModel
-        let limit: UInt
-        let href: String
+       public  let items: [ArtistModel]
+       public  let next: String
+       public  let total: UInt
+       public  let cursors: CursorModel
+       public  let limit: UInt
+       public  let href: String
     }
 }

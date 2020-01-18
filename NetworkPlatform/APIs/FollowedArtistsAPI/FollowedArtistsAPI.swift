@@ -19,6 +19,10 @@ public final class FollowedArtistsAPI {
   }
   
   public func load(requestParameter: FollowedArtistsNetworkModel.Request) -> Observable<FollowedArtistsNetworkModel.Response> {
-    return network.postItem(Constants.EndPoints.followedArtists.rawValue, parameters: requestParameter.dictionary!)
+    var requestFixedParameters = requestParameter.dictionary!
+    if let after = requestFixedParameters["after"] as? String, after.isEmpty, let index = requestFixedParameters.index(forKey: "after") {
+        requestFixedParameters.remove(at: index)
+    }
+    return network.getItem(Constants.EndPoints.followedArtists.rawValue, query: requestFixedParameters)
   }
 }

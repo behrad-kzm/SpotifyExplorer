@@ -13,23 +13,24 @@ import BEKCurveTabbar
 
 
 final class SplashNavigator: Navigator {
-	func setup() {
-		let splashVC = SplashViewController(nibName: "SplashViewController", bundle: nil)
-        splashVC.viewModel = SplashViewModel(navigator: self/*, authorization: services.networkServices.getAuthorizationManager()*/)
-		navigationController.viewControllers = [splashVC]
+    func setup() {
+        let splashVC = SplashViewController(nibName: "SplashViewController", bundle: nil)
+        splashVC.viewModel = SplashViewModel(navigator: self, authorization: services.networkServices.getAuthorizationManager())
+        navigationController.viewControllers = [splashVC]
         
-	}
-	
-	func toHome() {
-//        MainTabbarNavigator(services: services, navigationController: navigationController, tabbar: BEKCurveTabbarController.instantiate()).setup()
-	}
+    }
+    
+    func toHome() {
+        let tabbar = BEKCurveTabbarController()
+        FollowedUsersNavigator(services: services, navigationController: navigationController, tabBar: tabbar).setup()
+    }
     
     func toLogin(){
         LoginNavigator(services: services, navigationController: navigationController).setup()
     }
-	
-	func toOnboarding() {
-		
-	}
-	
+    
+    func toOnboarding() {
+        
+    }
+    
 }

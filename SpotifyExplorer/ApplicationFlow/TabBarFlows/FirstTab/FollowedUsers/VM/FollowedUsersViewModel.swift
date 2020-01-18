@@ -30,7 +30,7 @@ final class FollowedUsersViewModel: ViewModelType {
             if let after = response.artists.cursors.after {
                 requestStream.onNext(FollowedArtistsNetworkModel.Request(limit: 15, after: after))
             }
-        }).map{$0.artists.items}
+        }).map{$0.artists.items}.share(replay: 1, scope: .forever)
     }
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()

@@ -9,12 +9,15 @@
 import Foundation
 public enum FollowedArtistsNetworkModel: InteractiveModelType {
     
-    public struct Response: Codable {
+    public struct Response: Codable, Equatable {
         public let artists: ArtistsListResponseModel
+        public static func == (lhs: Response, rhs: Response) -> Bool {
+            return lhs.artists == rhs.artists
+        }
     }
     
     public struct Request: Codable, Equatable {
-
+        
         let type = "artist"
         let limit: UInt
         let after: String
@@ -28,13 +31,18 @@ public enum FollowedArtistsNetworkModel: InteractiveModelType {
         }
     }
     
-    public struct ArtistsListResponseModel: Codable {
-       public  let items: [ArtistModel]
-       public  let next: String?
-       public  let total: UInt
-       public  let cursors: CursorModel
-       public  let limit: UInt
-       public  let href: String
+    public struct ArtistsListResponseModel: Codable, Equatable {
+        
+        
+        public let items: [ArtistModel]
+        public let next: String?
+        public let total: UInt
+        public let cursors: CursorModel
+        public let limit: UInt
+        public let href: String
+        public static func == (lhs: ArtistsListResponseModel, rhs: ArtistsListResponseModel) -> Bool {
+            return lhs.href == rhs.href
+        }
     }
     
 }

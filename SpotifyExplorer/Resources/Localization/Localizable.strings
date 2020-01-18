@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  SpotifyExplorer
+
+  Created by Behrad Kazemi on 1/16/20.
+  Copyright © 2020 BEKApps. All rights reserved.
+*/
+
+//MARK: - Errors
+"AnErrorOccured" = "An error oqqurred.";
+"Error" = "Error";
+"ConnectionProblem" = "Something worng with your iternet connection";
+"UnknownError" = "Something wrong!";
+"NoInternet" = "Internet connection problem";
+"UserDidNotGrantAccess" = "User did not grant access to spotify.";
+"Forbidden" = "Access Denied! make sure your VPN is connected.";
+
+//MARK: - Buttons
+"Continue" = "Continue";
+"Cancel" = "Cancel";
+"Accept" = "Accept";
+"Delete" = "Remove";
+"DeleteAll" = "Remove All";
+"Edit" = "Edit";
+"Save" = "Save";
+"Login" = "Login with Spotify";
+"OK" = "OK";

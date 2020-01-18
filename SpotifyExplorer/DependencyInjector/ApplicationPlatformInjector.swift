@@ -12,22 +12,18 @@ final class ApplicationPlatformInjector {
     
     static let shared = ApplicationPlatformInjector()
     private let package: ServicePackage
-    
-    private init() {
-        let dataBase = RealmPlatform.UseCaseProvider()
-        self.package = ServicePackage(networkServices: NetworkPlatform.UseCaseProvider(), dataBaseServices: dataBase, settingsServices: SettingsPlatform.UseCaseProvider(database: dataBase.makeQueryManager()))
+    private(set) var spotifyHandler: AppProxyProtocol
+    private init() {        
+        self.package = ServicePackage(networkServices: NetworkPlatform.UseCaseProvider(), appearance: AppearanceProvider())
+        self.spotifyHandler = package.networkServices.getAuthorizationManager().proxy()
     }
     
     func setup(with window: UIWindow) {
-        setupKeyboard()
+        
         let mainNavigationController = MainNavigationController()
         window.rootViewController = mainNavigationController
         window.makeKeyAndVisible()
         SplashNavigator(services: package, navigationController: mainNavigationController).setup()
     }
-    func setupKeyboard(){
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
-    }
+
 }

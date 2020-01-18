@@ -2,86 +2,90 @@
 //  Authenticator.swift
 //  NetworkPlatform
 //
-//  Created by Behrad Kazemi on 11/17/19.
-//  Copyright © 2019 Golrang. All rights reserved.
+//  Created by Behrad Kazemi on 1/16/20.
+//  Copyright © 2020 BEKAppsDrafts. All rights reserved.
 //
 
 import Foundation
 import Domain
 import RxSwift
+import SpotifyLogin
 
 public class AuthorizationManager: Domain.AuthorizationManager {
     
-    public private(set) var status = AuthenticationStatus.notDetermined
+    public private(set) var status = AuthenticationStatus.notDetermined 
+    private var statusSubject = BehaviorSubject<AuthenticationStatus>.init(value: .notDetermined)
+    private let clientID = "249534df82014ae4a07a49958dcd5948"
+    private let secret = "3ec1d685136c4fad9c2b4f0675df8c79"
+    
     public static let shared: AuthorizationManager = {
         let auth = AuthorizationManager()
-        if let retrievedUUID = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.UUID.rawValue) {
-            auth.uuid = retrievedUUID
-        } else {
-            auth.uuid = UUID().uuidString
+        let redirectURL = URL(string: "spotifyexplorer://")!
+        SpotifyLogin.shared.configure(clientID: auth.clientID, clientSecret: auth.secret, redirectURL: redirectURL)
+        
+        if let retrievedToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue), !retrievedToken.isEmpty{
+            auth.status = .authorized
+            auth.accessToken = retrievedToken
+            auth.getNewToken()
+            return auth
         }
-        print("\n\nthe device uuid: \(auth.uuid!)")
-        if let retrievedRefreshToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.refreshToken.rawValue){
-            if retrievedRefreshToken != ""{
-                auth.status = .authorized
-                auth.refreshToken = retrievedRefreshToken
-                auth.accessToken = UserDefaults.standard.string(forKey: Constants.Keys.Authentication.accessToken.rawValue) ?? ""
-                return auth
-            }
-                }else{
-                    auth.accessToken = String()
-            }
+        auth.accessToken = String()        
         return auth
     }()
-  
-    public private(set) var uuid: String! {
-        didSet {
-            UserDefaults.standard.set(uuid, forKey: Constants.Keys.Authentication.UUID.rawValue)
-        }
-    }
+    
     public private(set) var accessToken: String! {
         didSet {
             UserDefaults.standard.set(accessToken, forKey: Constants.Keys.Authentication.accessToken.rawValue)
         }
     }
-    public private(set) var refreshToken: String! {
-        didSet {
-            UserDefaults.standard.set(refreshToken, forKey: Constants.Keys.Authentication.refreshToken.rawValue)
+    
+    public func tokenExpirationHandler(response: HTTPURLResponse) {
+         _ = getNewToken()
+    }
+    
+    public func update(token: String) {
+        accessToken = token
+        status = .authorized
+        statusSubject.onNext(status)
+        
+        print("Token: \n \'Bearer \(accessToken ?? "null")\'")
+    }
+    
+    public func logOut(completion: @escaping ()->()) {
+        accessToken = ""
+        status = .notDetermined
+        SpotifyLogin.shared.logout()
+        statusSubject.onNext(status)
+        completion()
+    }
+    
+    public func getNewToken(){        
+        SpotifyLogin.shared.getAccessToken { [unowned self](token, error) in
+            if let safeToken = token {
+                self.update(token: safeToken)
+            }
         }
     }
     
-    public func tokenExpirationHandler(response: HTTPURLResponse) {
-        if response.url?.absoluteString == Constants.EndPoints.tokenUrl.rawValue {
-            return
+    public func getStatusAsObservable() -> Observable<AuthenticationStatus> {
+        statusSubject.asObservable()
+    }
+    public func proxy() -> AppProxyProtocol {
+        return self
+    }
+}
+extension AuthorizationManager: Domain.AppProxyProtocol {
+    public func authorize(withURL url: URL) throws {
+        
+        let result = SpotifyLogin.shared.applicationOpenURL(url) { (error) in
+            //            [TODO] handle authorize if fails
+        }
+        if !result {
+            let error = NSError(domain: "SpotifySDK", code: 400, userInfo: ["message": "authorization was not successful"]) as Error
+            throw error
         }
         _ = getNewToken()
     }
     
-    public func loggedIn(token: TokenModel.Response) {
-        accessToken = token.token
-        refreshToken = token.refreshToken
-        status = .authorized
-        print("Token: \n \'Bearer \(accessToken ?? "null")\'")
-    }
     
-    public func LogOut(completion: @escaping ()->()) {
-        accessToken = ""
-        refreshToken = ""
-        status = .notDetermined
-        completion()
-    }
-    
-    public func getNewToken() -> Observable<Bool>{
-        let request = TokenModel.Request(refreshToken: refreshToken)
-        let result = NetworkProvider().makeAuthorizationNetwork().getToken(requestParameter: request)
-        return result.do(onNext: { [unowned self] (response) in
-            self.accessToken = response.token
-            self.refreshToken = response.refreshToken
-            self.status = .authorized
-            print("Token: \n \'Bearer \(self.accessToken ?? "null")\'")
-        }, onError: { (error) in
-            self.status = .tokenExpired
-            print(error)
-            }).map{_ in return true}
-    }
 }

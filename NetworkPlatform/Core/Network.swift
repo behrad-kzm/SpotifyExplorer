@@ -21,22 +21,9 @@ final class Network<T: Decodable> {
     }
     private var sharedHeaders: Dictionary<String,String> {
         if AuthorizationManager.shared.accessToken.isEmpty {
-          return ["uuid": AuthorizationManager.shared.uuid,
-                  "DeviceType": Constants.Info.deviceType(),
-                  "DeviceName": Constants.Info.deviceName(),
-                  "osVersion": Constants.Info.osVersion(),
-                  "osName": Constants.Info.osType,
-                  "ConnectionType": Constants.Info.connectionType(),
-                  "AppVersion": Constants.Info.appVersion()]
+            return [:]
         }
-            return ["Authorization" : tokenString,
-                    "uuid": AuthorizationManager.shared.uuid,
-                    "DeviceType": Constants.Info.deviceType(),
-                    "DeviceName": Constants.Info.deviceName(),
-                    "osVersion": Constants.Info.osVersion(),
-                    "osName": Constants.Info.osType,
-                    "ConnectionType": Constants.Info.connectionType(),
-                    "AppVersion": Constants.Info.appVersion()]
+            return ["Authorization" : tokenString]
     }
     init(_ endPoint: String) {
         self.endPoint = endPoint
@@ -60,15 +47,22 @@ final class Network<T: Decodable> {
                     } catch {
                         throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
                     }
+                }else if 401 == json.0.statusCode {
+                    print("TOKEN EXPIRED")
+                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
     }
     
-    func getItem(_ path: String, itemId: String = "", contentType: NetworkContentTypes = .json) -> Observable<T> {
-        let absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
+    func getItem(_ path: String, itemId: String = "", query: [String: Any] = [:], contentType: NetworkContentTypes = .json) -> Observable<T> {
+        
+        var absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
+        if !query.isEmpty {
+            absolutePath +=  "?" + query.queryString
+        }
+        let requestHeader = sharedHeaders
+        
         return RxAlamofire
             .request(.get, absolutePath, headers: requestHeader)
             .debug()
@@ -81,9 +75,7 @@ final class Network<T: Decodable> {
                         let data = json.1
                         let decoder = JSONDecoder()
                         decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-                        
                         return try decoder.decode(T.self, from: data)
-                        //            return try JSONDecoder().decode(T.self, from: json.1)
                     } catch let err {
                         print(String(bytes: json.1, encoding: .utf8) ?? "")
                         throw self.handle(error: err, data: json.1, StatusCode: json.0.statusCode)
@@ -94,7 +86,6 @@ final class Network<T: Decodable> {
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
-            
     }
     func postItem(_ path: String, parameters: [String: Any], contentType: NetworkContentTypes = .json) -> Observable<T> {
         let absolutePath = endPoint + path
@@ -103,7 +94,7 @@ final class Network<T: Decodable> {
         requestHeader["Content-Type"] = contentType.rawValue
         
         return RxAlamofire
-            .request(.post, absolutePath, parameters: parameters, encoding: contentType.asParameterEncoding(), headers: requestHeader)
+            .request(.post, absolutePath, parameters: parameters, encoding: JSONEncoding.default, headers: requestHeader)
             .debug()
             .observeOn(scheduler)
             .responseData()
@@ -115,71 +106,28 @@ final class Network<T: Decodable> {
                     } catch {
                         throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
                     }
-                }
-                throw self.handle(data: json.1, StatusCode: json.0.statusCode)
-            })
-    }
-    func putItem(_ path: String, parameters: [String: Any], contentType: NetworkContentTypes = .json) -> Observable<T> {
-        let absolutePath = endPoint + path
-        print("PUT: \non: \(absolutePath)\nparameters: \(parameters)")
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
-        return RxAlamofire
-            .request(.put, absolutePath, parameters: parameters, encoding: contentType.asParameterEncoding(), headers: requestHeader)
-            .debug()
-            .observeOn(scheduler)
-            .responseData()
-            .map({ (json) -> T in
-                ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
-                if 200 ... 299 ~= json.0.statusCode{
-                    do{
-                        return try JSONDecoder().decode(T.self, from: json.1)
-                    } catch {
-                        throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
-                    }
+                }else if 401 == json.0.statusCode {
+                    print("TOKEN EXPIRED")
+                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
                 }
                 throw self.handle(data: json.1, StatusCode: json.0.statusCode)
             })
     }
     
-    func postItems(_ path: String, parameters: [String: Any], contentType: NetworkContentTypes = .json) -> Observable<[T]> {
-        let absolutePath = endPoint + path
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
-        return RxAlamofire
-            .request(.post, absolutePath, parameters: parameters, encoding: contentType.asParameterEncoding(), headers: requestHeader)
-            .debug()
-            .observeOn(scheduler)
-            .responseData()
-            .map({ [unowned self] (json) -> [T] in
-                ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
-                if 200 ... 299 ~= json.0.statusCode{
-                    do{
-                        return try JSONDecoder().decode([T].self, from: json.1)
-                    } catch {
-											
-                        throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
-                    }
-                }
-                throw self.handle(data: json.1, StatusCode: json.0.statusCode)
-            })
-    }
     
     func handle(error: Error, data: Data, StatusCode code: Int) -> NSError {
 			ResponseAnalytics.printError(status: code, error: error)
         do {
-            let responseError = try JSONDecoder().decode(ResponseMessage.Base.self, from: data)
-					
-            return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
-        }catch{
+            let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
+            return NSError(domain: "Network", code: code, userInfo: ["responseError": responseError])
+        }catch {
             return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
         }
     }
     
 	func handle(data: Data, StatusCode code: Int) -> NSError {
 		do {
-			let responseError = try JSONDecoder().decode(ResponseMessage.Base.self, from: data)
-			
+			let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
 			return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
 		}catch{
 			return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])

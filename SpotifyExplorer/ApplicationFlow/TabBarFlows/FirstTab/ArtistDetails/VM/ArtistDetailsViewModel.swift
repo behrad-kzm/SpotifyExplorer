@@ -29,7 +29,7 @@ final class ArtistDetailsViewModel: ViewModelType {
             if let offset = response.next?.components(separatedBy: "offset=").last?.components(separatedBy: "&limit").first {
                 requestStream.onNext(ArtistAlbumsNetworkModel.Request(limit: 15, includeGroups: [.album], offset: offset))
             }
-        }).map{ $0.items }
+        }).map{ $0.items }.share(replay: 1, scope: .forever)
     }
     
     func transform(input: Input) -> Output {

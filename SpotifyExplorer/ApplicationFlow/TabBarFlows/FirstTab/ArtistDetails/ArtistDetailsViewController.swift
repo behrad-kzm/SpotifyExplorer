@@ -13,7 +13,7 @@ import RxSwift
 import Lottie
 import RxCocoa
 class ArtistDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var artistsTableView: BEKMultiCellTable!
     var viewModel: ArtistDetailsViewModel!
     @IBOutlet weak var noContentView: UIView!
@@ -70,7 +70,8 @@ class ArtistDetailsViewController: UIViewController {
             return CGFloat(0.0)
         }.skip(3).distinctUntilChanged(), closeTrigger: closeButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        [output.showEmpty.do(onNext: { [unowned self](show) in
+        let disposables = [
+            output.showEmpty.do(onNext: { [unowned self](show) in
             if show {
                 self.noContentView.alpha = 0
                 self.noContentView.isHidden = !show
@@ -83,9 +84,16 @@ class ArtistDetailsViewController: UIViewController {
                     self.animation.play()
                 }.animate()
             }
-            }).drive(), output.closeAction.drive(), output.error.drive(), output.isFetching.drive(), output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
+        }).drive(),
+            
+            output.closeAction.drive(),
+            output.error.drive(),
+            output.isFetching.drive(),
+            output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
             artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<AlbumTableViewCell>(viewModel: $0)})
-        })].forEach { (item) in
+        })]
+        
+        disposables.forEach { (item) in
             item.disposed(by: disposeBag)
         }
     }

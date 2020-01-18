@@ -12,10 +12,10 @@ import Stellar
 import RxSwift
 import RxCocoa
 class FollowedUsersViewController: UIViewController {
-
+    
     @IBOutlet weak var artistsTableView: BEKMultiCellTable!
     var viewModel: FollowedUsersViewModel!
-
+    
     //MARK:- Outlets
     @IBOutlet weak var headerBlurView: UIVisualEffectView!
     @IBOutlet weak var headerContainer: UIView!
@@ -52,11 +52,17 @@ class FollowedUsersViewController: UIViewController {
                 return result > 0 ? result : CGFloat(0.0)
             }
             return CGFloat(0.0)
-            }.skip(3).distinctUntilChanged())
+        }.skip(3).distinctUntilChanged())
         let output = viewModel.transform(input: input)
-        [output.sectionAction.drive(), output.error.drive(), output.isFetching.drive(), output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
-            artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<FollowedUsersCell>(viewModel: $0)})
-        })].forEach { (item) in
+        let disposables = [
+            output.sectionAction.drive(),
+            output.error.drive(),
+            output.isFetching.drive(),
+            output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
+                artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<FollowedUsersCell>(viewModel: $0)})
+            })]
+        
+        disposables.forEach { (item) in
             item.disposed(by: disposeBag)
         }
     }

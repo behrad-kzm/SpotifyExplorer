@@ -52,6 +52,8 @@
 		13A61C3023CF98250045D8E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13A61C2F23CF98250045D8E9 /* Assets.xcassets */; };
 		13A61C3E23CF98250045D8E9 /* SpotifyExplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A61C3D23CF98250045D8E9 /* SpotifyExplorerTests.swift */; };
 		13A61C4923CF98250045D8E9 /* SpotifyExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A61C4823CF98250045D8E9 /* SpotifyExplorerUITests.swift */; };
+		13C02BB023D392A3004A5346 /* JsonsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BAF23D392A3004A5346 /* JsonsMock.swift */; };
+		13C8082823D385780070A5D2 /* TestArtistsAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */; };
 		13D77CA623CF9B8F00A08683 /* ApplicationPlatformInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */; };
 		13D77CBE23CF9BC500A08683 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D77CAE23CF9BC400A08683 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13D77CC123CF9BC500A08683 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D77CAC23CF9BC400A08683 /* Domain.framework */; };
@@ -253,6 +255,8 @@
 		13A61C4423CF98250045D8E9 /* SpotifyExplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotifyExplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A61C4823CF98250045D8E9 /* SpotifyExplorerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyExplorerUITests.swift; sourceTree = "<group>"; };
 		13A61C4A23CF98250045D8E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13C02BAF23D392A3004A5346 /* JsonsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonsMock.swift; sourceTree = "<group>"; };
+		13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArtistsAlbum.swift; sourceTree = "<group>"; };
 		13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationPlatformInjector.swift; sourceTree = "<group>"; };
 		13D77CAC23CF9BC400A08683 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D77CAE23CF9BC400A08683 /* Domain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Domain.h; sourceTree = "<group>"; };
@@ -706,6 +710,23 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		13C8082923D3857E0070A5D2 /* TestFlows */ = {
+			isa = PBXGroup;
+			children = (
+				13C8082A23D385910070A5D2 /* TestArtistsAlbum */,
+			);
+			path = TestFlows;
+			sourceTree = "<group>";
+		};
+		13C8082A23D385910070A5D2 /* TestArtistsAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */,
+				13C02BAF23D392A3004A5346 /* JsonsMock.swift */,
+			);
+			path = TestArtistsAlbum;
+			sourceTree = "<group>";
+		};
 		13D77CAD23CF9BC400A08683 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +756,7 @@
 		13D77CDD23CF9BDD00A08683 /* NetworkPlatformTests */ = {
 			isa = PBXGroup;
 			children = (
+				13C8082923D3857E0070A5D2 /* TestFlows */,
 				13D77CDE23CF9BDD00A08683 /* NetworkPlatformTests.swift */,
 				13D77CE023CF9BDD00A08683 /* Info.plist */,
 			);
@@ -1632,6 +1654,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13C8082823D385780070A5D2 /* TestArtistsAlbum.swift in Sources */,
+				13C02BB023D392A3004A5346 /* JsonsMock.swift in Sources */,
 				13D77CDF23CF9BDD00A08683 /* NetworkPlatformTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

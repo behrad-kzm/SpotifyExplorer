@@ -9,7 +9,7 @@
 import Foundation
 public enum ArtistAlbumsNetworkModel: InteractiveModelType {
     
-    public struct Response: Codable {
+    public struct Response: Codable, Equatable {
         public let href: String
         public let items: [AlbumsInfoItemModel]
         public let limit: UInt
@@ -17,6 +17,9 @@ public enum ArtistAlbumsNetworkModel: InteractiveModelType {
         public let offset: UInt
         public let previous: String?
         public let total: UInt
+        public static func == (lhs: Response, rhs: Response) -> Bool {
+            return lhs.href == rhs.href && lhs.limit == rhs.limit && lhs.next == rhs.next && lhs.previous == rhs.previous
+        }
     }
     
     public struct Request: Codable, Equatable {

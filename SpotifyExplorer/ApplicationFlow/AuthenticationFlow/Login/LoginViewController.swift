@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
                            animations: { [weak self] in
                             self?.sendLabel?.isHidden = false
                             self?.sendLabel?.alpha =  1
-            },
+                },
                            completion: nil)
         }.animate()
     }
@@ -114,31 +114,34 @@ class LoginViewController: UIViewController {
     private func bindData(){
         let input = LoginViewModel.Input(loginTrigger: loginButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        [output.action.do(onNext: { () in
-            DispatchQueue.main.async {
-                self.animateVerified()
-            }
-        }).drive(), output.isFetching.do(onNext: { [ loginButton, indicator, sendLabel](fetching) in
-            DispatchQueue.main.async {
-                if loginButton?.isUserInteractionEnabled ?? false {
-                    UIView.animate(withDuration: 0.5,
-                                   delay: 0.0,
-                                   usingSpringWithDamping: 0.9,
-                                   initialSpringVelocity: 1,
-                                   options: [],
-                                   animations: {
-                                    sendLabel?.isHidden = fetching
-                                    sendLabel?.alpha = fetching ? 0 : 1
-                    },
-                                   completion: nil)
+        let disposables = [
+            output.action.do(onNext: { () in
+                DispatchQueue.main.async {
+                    self.animateVerified()
                 }
-                if fetching {
-                    indicator?.startAnimating()
-                    return
+            }).drive(),
+            output.isFetching.do(onNext: { [ loginButton, indicator, sendLabel](fetching) in
+                DispatchQueue.main.async {
+                    if loginButton?.isUserInteractionEnabled ?? false {
+                        UIView.animate(withDuration: 0.5,
+                                       delay: 0.0,
+                                       usingSpringWithDamping: 0.9,
+                                       initialSpringVelocity: 1,
+                                       options: [],
+                                       animations: {
+                                        sendLabel?.isHidden = fetching
+                                        sendLabel?.alpha = fetching ? 0 : 1
+                        },
+                                       completion: nil)
+                    }
+                    if fetching {
+                        indicator?.startAnimating()
+                        return
+                    }
+                    indicator?.stopAnimating()
                 }
-                indicator?.stopAnimating()
-            }
-        }).drive()].forEach { (item) in
+            }).drive()]
+        disposables.forEach { (item) in
             item.disposed(by: disposeBag)
         }
     }

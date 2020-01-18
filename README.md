@@ -2,6 +2,8 @@
 
 <img src="https://github.com/behrad-kzm/BEKDesing/blob/master/Images/BEKHeader.png">
 
+<img src="Documents/ICON.png">
+
 # A sample over The Clean Architecture + RxSwift + MVVMC uses the Spotify APIs
 
 ### Installing and build

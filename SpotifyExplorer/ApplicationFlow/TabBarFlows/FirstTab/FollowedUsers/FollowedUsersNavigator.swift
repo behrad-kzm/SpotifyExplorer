@@ -15,7 +15,7 @@ final class FollowedUsersNavigator: Navigator {
     private let tabBarVC: UITabBarController
     
     init(services: ServicePackage, navigationController: UINavigationController, tabBar: UITabBarController) {
-        self.tabBarVC = tabBar //[TODO] implement tabBar
+        self.tabBarVC = tabBar //[TODO] implement tabBar this the magic of the navigator :D
         super.init(services: services, navigationController: navigationController)
     }
     
@@ -26,5 +26,8 @@ final class FollowedUsersNavigator: Navigator {
         navigationController.isHeroEnabled = true
         navigationController.heroNavigationAnimationType = .none
         navigationController.pushViewController(targetViewController, animated: true)
+    }
+    func toAlbums(forArtist artist: ArtistModel) {
+        ArtistDetailsNavigator(services: services, navigationController: navigationController).setup(forArtist: artist)
     }
 }

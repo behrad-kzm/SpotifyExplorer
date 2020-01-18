@@ -15,6 +15,7 @@ public final class ArtistsAlbumUseCase: Domain.ArtistsAlbumUseCase  {
         self.network = network
     }
     public func load(requestParameters: ArtistAlbumsNetworkModel.Request) -> Observable<ArtistAlbumsNetworkModel.Response> {
+        
         return network.load(requestParameter: requestParameters).share(replay: 1, scope: .forever)
     }
 }

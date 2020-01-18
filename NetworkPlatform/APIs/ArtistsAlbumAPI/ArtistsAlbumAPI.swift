@@ -21,10 +21,11 @@ public final class ArtistsAlbumAPI {
     
     public func load(requestParameter: ArtistAlbumsNetworkModel.Request) -> Observable<ArtistAlbumsNetworkModel.Response> {
         var requestFixedParameters = requestParameter.dictionary!
-        if let after = requestFixedParameters["after"] as? String, after.isEmpty, let index = requestFixedParameters.index(forKey: "after") {
+        if let offset = requestFixedParameters["offset"] as? String, offset.isEmpty, let index = requestFixedParameters.index(forKey: "offset") {
             requestFixedParameters.remove(at: index)
         }
-        let endpoint = Constants.EndPoints.followedArtists.rawValue + artist.id + "/albums"
+        
+        let endpoint = Constants.EndPoints.artistsAlbum.rawValue + "/" + artist.id + "/albums"
         return network.getItem(endpoint, query: requestFixedParameters)
     }
 }

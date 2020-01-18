@@ -13,40 +13,56 @@ import Domain
 import SpotifyLogin
 final class ArtistDetailsViewModel: ViewModelType {
     
-    let navigator: LoginNavigator
-    private let networkServices: LoginUseCase
+    let navigator: ArtistDetailsNavigator
+    private let networkServices: ArtistsAlbumUseCase
     let appearance: AppearanceProvider
-    init(navigator: LoginNavigator, networkServices: LoginUseCase, appearance: AppearanceProvider) {
+    let requestStream = BehaviorSubject.init(value: ArtistAlbumsNetworkModel.Request(limit: 15, includeGroups: [.album]))
+    
+    init(navigator: ArtistDetailsNavigator, networkServices: ArtistsAlbumUseCase, appearance: AppearanceProvider) {
         self.navigator = navigator
         self.networkServices = networkServices
         self.appearance = appearance
     }
-    func getAlbums()  {
-//        return networkServices.loginScopes().compactMap{ Scope.init(rawValue: $0) }
+    
+    func loadMoreItems(request: ArtistAlbumsNetworkModel.Request) -> Observable<[AlbumsInfoItemModel]> {
+        return networkServices.load(requestParameters: request).do(onNext: { [requestStream](response) in
+            if let offset = response.next?.components(separatedBy: "offset=").last?.components(separatedBy: "&limit").first {
+                requestStream.onNext(ArtistAlbumsNetworkModel.Request(limit: 15, includeGroups: [.album], offset: offset))
+            }
+        }).map{ $0.items }
     }
+    
     func transform(input: Input) -> Output {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
-        let action = networkServices.listenToLogin().do(onNext: { [navigator](loggedIn) in
-            if !loggedIn {
-                let error = NSError(domain: "Acces denied", code: 401, userInfo: ["message": NSLocalizedString("UserDidNotGrantAccess", comment: "")])
-                navigator.prepareFor(error: error)
-            }
-        }).asDriverOnErrorJustComplete().mapToVoid()
+        
+        let loadMore = input.bottomOffset.filter{ $0 == 0.0 }.startWith(0.0).withLatestFrom(requestStream).distinctUntilChanged().flatMapLatest { [unowned self](requestItem) -> Observable<[AlbumItemViewModel]> in
+            self.loadMoreItems(request: requestItem).map{ $0.compactMap{ AlbumItemViewModel(model: $0)}}
+        }.trackError(errorTracker).trackActivity(activityIndicator)
+        
         let fetching = activityIndicator.asDriver()
-        let errors = errorTracker.asDriver()
-        return Output(isFetching: fetching, action: action, error: errors)
+        let errors = errorTracker.asDriver().do(onNext: { [navigator](error) in
+            navigator.prepareFor(error: error)
+        })
+        let close = input.closeTrigger.do(onNext: { [navigator]() in
+            navigator.toHome()
+        })
+        let showEmpty = loadMore.take(1).map{$0.isEmpty}.asDriverOnErrorJustComplete()
+        return Output(isFetching: fetching, closeAction: close, showEmpty: showEmpty, newItems: loadMore, error: errors)
     }
-
 }
+
 extension ArtistDetailsViewModel {
     struct Input {
-        let loginTrigger: Driver<Void>
+        let bottomOffset: Observable<CGFloat>
+        let closeTrigger: Driver<Void>
     }
     
     struct Output {
         let isFetching: Driver<Bool>
-        let action: Driver<Void>
+        let closeAction: Driver<Void>
+        let showEmpty: Driver<Bool>
+        let newItems: Observable<[AlbumItemViewModel]>
         let error: Driver<Error>
     }
 }

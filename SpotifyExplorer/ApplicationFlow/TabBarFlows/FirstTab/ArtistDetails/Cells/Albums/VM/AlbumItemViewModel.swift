@@ -1,5 +1,5 @@
 //
-//  FollowedUsersItemViewModel.swift
+//  AlbumItemViewModel.swift
 //  SpotifyExplorer
 //
 //  Created by Behrad Kazemi on 1/18/20.
@@ -9,19 +9,19 @@
 import Foundation
 import Domain
 import UIKit
-public struct FollowedUsersItemViewModel {
-    let artist: ArtistModel
+public struct AlbumItemViewModel {
+    let model: AlbumsInfoItemModel
     let profileImagePath: String
     let title: String
-    let genre: String
+    let artists: String
     
-    init(model: ArtistModel) {
-        self.artist = model
+    init(model: AlbumsInfoItemModel) {
+        self.model = model
         self.title = model.name
-        let mixedGenres = model.genres.reduce("", { (previous, item) -> String in
-            return "\(previous) - \(item)"
+        let mixedArtists = model.artists.reduce("", { (previous, item) -> String in
+            return "\(previous) - \(item.name)"
             }).dropFirst()
-        self.genre = String(mixedGenres)
+        self.artists = String(mixedArtists)
         if let safeURL = model.images.first?.url {
             self.profileImagePath = safeURL
             return

@@ -19,9 +19,6 @@ class FollowedUsersViewController: UIViewController {
     //MARK:- Outlets
     @IBOutlet weak var headerBlurView: UIVisualEffectView!
     @IBOutlet weak var headerContainer: UIView!
-
-    var loginButton: UIButton!
-    
     let disposeBag = DisposeBag()
     
     //MARK:- LifeCycle
@@ -57,7 +54,7 @@ class FollowedUsersViewController: UIViewController {
             return CGFloat(0.0)
             }.skip(3).distinctUntilChanged())
         let output = viewModel.transform(input: input)
-        [output.error.drive(), output.isFetching.drive(), output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
+        [output.sectionAction.drive(), output.error.drive(), output.isFetching.drive(), output.newItems.subscribe(onNext: { [artistsTableView](newViewModels) in
             artistsTableView?.push(cells: newViewModels.compactMap{BEKGenericCell<FollowedUsersCell>(viewModel: $0)})
         })].forEach { (item) in
             item.disposed(by: disposeBag)

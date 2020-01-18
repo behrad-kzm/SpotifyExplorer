@@ -13,9 +13,9 @@ public enum ArtistAlbumsNetworkModel: InteractiveModelType {
         public let href: String
         public let items: [AlbumsInfoItemModel]
         public let limit: UInt
-        public let next: String
+        public let next: String?
         public let offset: UInt
-        public let previous: String
+        public let previous: String?
         public let total: UInt
     }
     
@@ -24,26 +24,19 @@ public enum ArtistAlbumsNetworkModel: InteractiveModelType {
         let include_groups: String
         let limit: UInt
         let market: String
-        public init (limit: UInt, include_groups: String, market: String = "US") {
+        let offset: String
+        public init (limit: UInt, includeGroups: [AlbumIncludeGroupType], market: String = "US", offset: String = "") {
             self.limit = limit
-            self.include_groups = include_groups
+            let mixedGroups = includeGroups.reduce("", { (previous, item) -> String in
+            return previous + "," + item.rawValue
+            }).dropFirst()
+            self.include_groups = String(mixedGroups)
             self.market = market
+            self.offset = offset
         }
         public static func == (lhs: Request, rhs: Request) -> Bool {
-            return lhs.market == rhs.market && lhs.include_groups == rhs.include_groups && lhs.limit == rhs.limit
+            return lhs.market == rhs.market && lhs.offset == rhs.offset && lhs.include_groups == rhs.include_groups && lhs.limit == rhs.limit
         }
-    }
-    
-    public struct AlbumsInfoItemModel: Codable {
-        public let album_group: String
-        public let album_type: String
-        public let artists: [AlbumArtistItemModel]
-        public let images: [ImageModel]
-        public let name: String
-        public let release_date: String
-        public let release_date_precision: String
-        public let type: String
-        public let uri: String
     }
 }
 

@@ -11,24 +11,21 @@ import Domain
 import RxCocoa
 
 final class ArtistDetailsNavigator: Navigator {
-    
-    private let tabBarVC: UITabBarController
-    
-    init(services: ServicePackage, navigationController: UINavigationController, tabBar: UITabBarController) {
-        self.tabBarVC = tabBar
-        super.init(services: services, navigationController: navigationController)
-    }
-    
-    func setup(){
-//        let targetViewController = FollowedUsersViewController(nibName: "FollowedUsersViewController", bundle: nil)
-//        targetViewController.isHeroEnabled = true
-//        targetViewController.viewModel = FollowedUsersViewModel(navigator: self, networkServices: services.networkServices.getFollowedUsersUseCases(), appearance: services.appearance)
-//        navigationController.isHeroEnabled = true
-//        navigationController.heroNavigationAnimationType = .none
-//        navigationController.pushViewController(targetViewController, animated: true)
+    func setup(forArtist artist: ArtistModel){
+        let targetViewController = ArtistDetailsViewController(nibName: "ArtistDetailsViewController", bundle: nil)
+        targetViewController.isHeroEnabled = true
+        targetViewController.viewModel = ArtistDetailsViewModel(navigator: self, networkServices: services.networkServices.getArtistsAlbumUseCases(forArtist: artist), appearance: services.appearance)
+        navigationController.isHeroEnabled = true
+        navigationController.heroNavigationAnimationType = .none
+        if let safeVC = navigationController.viewControllers.last{
+            targetViewController.modalPresentationStyle = .overCurrentContext
+            safeVC.present(targetViewController, animated: true, completion: nil)
+        }
     }
     
     func toHome(){
-        
+        if let safeVC = navigationController.viewControllers.last?.presentedViewController {
+            safeVC.dismiss(animated: true, completion: nil)
+        }
     }
 }

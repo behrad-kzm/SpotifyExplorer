@@ -45,6 +45,7 @@ final class Network<T: Decodable> {
         let safeManager = AuthorizationManager.shared
         
         let tokenExpirationObservable = responseObservable.filter{ $0.0.statusCode == 401 }.flatMapLatest { [unowned safeManager, unowned self] (response, data) -> Observable<(HTTPURLResponse, Data)> in
+            print("TOKEN EXPIRED!")
             return safeManager.refreshAccessToken().concatMap { [unowned self](token) -> Observable<(HTTPURLResponse, Data)> in
                 return RxAlamofire
                     .request(.get, absolutePath, headers: self.sharedHeaders)

@@ -64,8 +64,10 @@ public class AuthorizationManager: Domain.AuthorizationManager {
     }
     
     public func refreshAccessToken() -> Observable<String> {
-        return Observable.create { observer in
-            SpotifyLogin.shared.getAccessToken { (token, error) in
+        let manager = SpotifyLogin.shared
+        return Observable.create { [unowned manager] observer in
+            manager.getAccessToken { (token, error) in
+                print("TOKEN REFRESHED \(token) error: \(error)")
                 if let safeError = error {
                     observer.onError(safeError)
                     observer.onCompleted()

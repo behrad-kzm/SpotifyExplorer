@@ -2,7 +2,24 @@
 
 <img src="https://github.com/behrad-kzm/BEKDesing/blob/master/Images/BEKHeader.png">
 
+<img src="Documents/ICON.png" height="600">
+
 # A sample over The Clean Architecture + RxSwift + MVVMC uses the Spotify APIs
+
+### Demo
+
+1- Splash
+
+<img src="Documents/ezgif-2-7506a74a7fed.gif" height="600">
+
+2- Login & Following
+
+<img src="Documents/ezgif-2-bb1de092954d.gif" height="600">
+
+3- Albums List
+
+<img src="Documents/ezgif-2-d6af6f6026a7.gif" height="600">
+
 
 ### Installing and build
 

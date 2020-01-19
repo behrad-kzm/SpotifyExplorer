@@ -39,10 +39,6 @@ public class AuthorizationManager: Domain.AuthorizationManager {
         }
     }
     
-    public func tokenExpirationHandler(response: HTTPURLResponse) {
-         _ = getNewToken()
-    }
-    
     public func update(token: String) {
         accessToken = token
         status = .authorized
@@ -59,7 +55,7 @@ public class AuthorizationManager: Domain.AuthorizationManager {
         completion()
     }
     
-    public func getNewToken(){        
+    private func getNewToken(){
         SpotifyLogin.shared.getAccessToken { [unowned self](token, error) in
             if let safeToken = token {
                 self.update(token: safeToken)
@@ -67,18 +63,45 @@ public class AuthorizationManager: Domain.AuthorizationManager {
         }
     }
     
+    public func refreshAccessToken() -> Observable<String> {
+        return Observable.create { observer in
+            SpotifyLogin.shared.getAccessToken { (token, error) in
+                if let safeError = error {
+                    observer.onError(safeError)
+                    observer.onCompleted()
+                    return
+                }
+                if let safeToken = token, !safeToken.isEmpty {
+                    observer.onNext(safeToken)
+                    observer.onCompleted()
+                    return
+                }
+                let error = NSError(domain: ErrorTypes.internalError.rawValue, code: 400, userInfo: ["message" : "SpotifyLogin - Token completion has an unexpectable error!"])
+                observer.onError(error)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }.do(onNext: { [unowned self, statusSubject](token) in
+            self.accessToken = token
+            self.status = .authorized
+            statusSubject.onNext(self.status)
+        })
+    }
+    
     public func getStatusAsObservable() -> Observable<AuthenticationStatus> {
         statusSubject.asObservable()
     }
+    
     public func proxy() -> AppProxyProtocol {
         return self
     }
 }
+
 extension AuthorizationManager: Domain.AppProxyProtocol {
     public func authorize(withURL url: URL) throws {
         
         let result = SpotifyLogin.shared.applicationOpenURL(url) { (error) in
-            //            [TODO] handle authorize if fails
+            
         }
         if !result {
             let error = NSError(domain: "SpotifySDK", code: 400, userInfo: ["message": "authorization was not successful"]) as Error
@@ -86,6 +109,5 @@ extension AuthorizationManager: Domain.AppProxyProtocol {
         }
         _ = getNewToken()
     }
-    
-    
 }
+

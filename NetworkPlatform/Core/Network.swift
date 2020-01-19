@@ -23,100 +23,57 @@ final class Network<T: Decodable> {
         if AuthorizationManager.shared.accessToken.isEmpty {
             return [:]
         }
-            return ["Authorization" : tokenString]
+        return ["Authorization" : tokenString]
     }
     init(_ endPoint: String) {
         self.endPoint = endPoint
         self.scheduler = ConcurrentDispatchQueueScheduler(qos: DispatchQoS(qosClass: DispatchQoS.QoSClass.background, relativePriority: 1))
     }
-    
-    func getItems(_ path: String, itemId: String = "", contentType: NetworkContentTypes = .json) -> Observable<[T]> {
-        let absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
-        return RxAlamofire
-            .request(.get, absolutePath, headers: requestHeader)
-            .debug()
-            .observeOn(scheduler)
-            .responseData()
-            .map({ [unowned self] (json) -> [T] in
-                ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
-                if 200 ... 299 ~= json.0.statusCode{
-                    do{
-                        return try JSONDecoder().decode([T].self, from: json.1)
-                    } catch {
-                        throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
-                    }
-                }else if 401 == json.0.statusCode {
-                    print("TOKEN EXPIRED")
-                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
-                }
-                throw self.handle(data: json.1, StatusCode: json.0.statusCode)
-            })
-    }
-    
     func getItem(_ path: String, itemId: String = "", query: [String: Any] = [:], contentType: NetworkContentTypes = .json) -> Observable<T> {
         
         var absolutePath = itemId == "" ? endPoint + path : endPoint + "\(path)/\(itemId)"
         if !query.isEmpty {
             absolutePath +=  "?" + query.queryString
         }
-        let requestHeader = sharedHeaders
         
-        return RxAlamofire
-            .request(.get, absolutePath, headers: requestHeader)
+        let responseObservable = RxAlamofire
+            .request(.get, absolutePath, headers: sharedHeaders)
             .debug()
             .observeOn(scheduler)
             .responseData()
-            .map({ [unowned self] (json) -> T in
-							ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
-                if 200 ... 299 ~= json.0.statusCode{
-                    do{
-                        let data = json.1
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
-                        return try decoder.decode(T.self, from: data)
-                    } catch let err {
-                        print(String(bytes: json.1, encoding: .utf8) ?? "")
-                        throw self.handle(error: err, data: json.1, StatusCode: json.0.statusCode)
-                    }
-                }else if 401 == json.0.statusCode {
-                    print("TOKEN EXPIRED")
-                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
-                }
-                throw self.handle(data: json.1, StatusCode: json.0.statusCode)
-            })
-    }
-    func postItem(_ path: String, parameters: [String: Any], contentType: NetworkContentTypes = .json) -> Observable<T> {
-        let absolutePath = endPoint + path
-        print("POST: \non: \(absolutePath)\nparameters: \(parameters)")
-        var requestHeader = sharedHeaders
-        requestHeader["Content-Type"] = contentType.rawValue
         
-        return RxAlamofire
-            .request(.post, absolutePath, parameters: parameters, encoding: JSONEncoding.default, headers: requestHeader)
-            .debug()
-            .observeOn(scheduler)
-            .responseData()
-            .map({ [unowned self] (json) -> T in
-                ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
-                if 200 ... 299 ~= json.0.statusCode {
-                    do{
-                        return try JSONDecoder().decode(T.self, from: json.1)
-                    } catch {
-                        throw self.handle(error: error, data: json.1, StatusCode: json.0.statusCode)
-                    }
-                }else if 401 == json.0.statusCode {
-                    print("TOKEN EXPIRED")
-                    AuthorizationManager.shared.tokenExpirationHandler(response: json.0)
+        let safeManager = AuthorizationManager.shared
+        
+        let tokenExpirationObservable = responseObservable.filter{ $0.0.statusCode == 401 }.flatMapLatest { [unowned safeManager, unowned self] (response, data) -> Observable<(HTTPURLResponse, Data)> in
+            return safeManager.refreshAccessToken().concatMap { [unowned self](token) -> Observable<(HTTPURLResponse, Data)> in
+                return RxAlamofire
+                    .request(.get, absolutePath, headers: self.sharedHeaders)
+                    .debug()
+                    .observeOn(self.scheduler)
+                    .responseData()
+            }
+        }
+        
+        let result = Observable.merge(responseObservable.filter{ $0.0.statusCode != 401 }, tokenExpirationObservable)
+        return result.map({ [unowned self] (json) -> T in
+            ResponseAnalytics.printResponseData(status: json.0.statusCode, responseData: json.1)
+            if 200 ... 299 ~= json.0.statusCode{
+                do{
+                    let data = json.1
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(Formatter.iso8601)
+                    return try decoder.decode(T.self, from: data)
+                } catch let err {
+                    print(String(bytes: json.1, encoding: .utf8) ?? "")
+                    throw self.handle(error: err, data: json.1, StatusCode: json.0.statusCode)
                 }
-                throw self.handle(data: json.1, StatusCode: json.0.statusCode)
-            })
+            }
+            throw self.handle(data: json.1, StatusCode: json.0.statusCode)
+        })
     }
-    
     
     func handle(error: Error, data: Data, StatusCode code: Int) -> NSError {
-			ResponseAnalytics.printError(status: code, error: error)
+        ResponseAnalytics.printError(status: code, error: error)
         do {
             let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
             return NSError(domain: "Network", code: code, userInfo: ["responseError": responseError])
@@ -125,12 +82,12 @@ final class Network<T: Decodable> {
         }
     }
     
-	func handle(data: Data, StatusCode code: Int) -> NSError {
-		do {
-			let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
-			return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
-		}catch{
-			return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
-		}
-	}
+    func handle(data: Data, StatusCode code: Int) -> NSError {
+        do {
+            let responseError = try JSONDecoder().decode(BaseErrorModel.self, from: data)
+            return NSError(domain: ErrorTypes.externalError.rawValue, code: code, userInfo: ["responseError": responseError])
+        }catch{
+            return NSError(domain: ErrorTypes.internalError.rawValue, code: code, userInfo: ["data" : data])
+        }
+    }
 }

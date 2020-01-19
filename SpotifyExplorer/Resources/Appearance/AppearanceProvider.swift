@@ -7,11 +7,11 @@
 //
 
 import Foundation
-public final class AppearanceProvider{
-    public func getColors() -> ColorsPack {
-        return ColorsPack()
+final class AppearanceProvider{
+     func getColors() -> ColorsPack {
+        return DarkTheme()
     }
-    public func getFonts() -> FontsPack {
+     func getFonts() -> FontsPack {
         return FontsPack()
     }
 }

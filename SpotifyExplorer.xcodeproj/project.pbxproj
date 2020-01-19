@@ -28,7 +28,6 @@
 		1376D9B623D1A9FD00EE9114 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9B523D1A9FD00EE9114 /* LoginUseCase.swift */; };
 		1376D9B823D1ED8800EE9114 /* ObservableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9B723D1ED8800EE9114 /* ObservableExtensions.swift */; };
 		1376D9BD23D1FA6D00EE9114 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9BC23D1FA6D00EE9114 /* AuthorizationManager.swift */; };
-		1376D9BF23D2211A00EE9114 /* AppProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9BE23D2211A00EE9114 /* AppProxy.swift */; };
 		1376D9C123D2214800EE9114 /* AppProxyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9C023D2214800EE9114 /* AppProxyProtocol.swift */; };
 		1376D9C423D2345900EE9114 /* ArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9C323D2345900EE9114 /* ArtistModel.swift */; };
 		1376D9C623D236DE00EE9114 /* FollowedArtistsNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376D9C523D236DE00EE9114 /* FollowedArtistsNetworkModel.swift */; };
@@ -54,6 +53,8 @@
 		13A61C4923CF98250045D8E9 /* SpotifyExplorerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A61C4823CF98250045D8E9 /* SpotifyExplorerUITests.swift */; };
 		13C02BB023D392A3004A5346 /* JsonsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BAF23D392A3004A5346 /* JsonsMock.swift */; };
 		13C02BB323D3A2C0004A5346 /* TestFollowedArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB223D3A2C0004A5346 /* TestFollowedArtists.swift */; };
+		13C02BB523D4BC7D004A5346 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB423D4BC7D004A5346 /* LightTheme.swift */; };
+		13C02BB723D4BE1B004A5346 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB623D4BE1A004A5346 /* DarkTheme.swift */; };
 		13C8082823D385780070A5D2 /* TestArtistsAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */; };
 		13D77CA623CF9B8F00A08683 /* ApplicationPlatformInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */; };
 		13D77CBE23CF9BC500A08683 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D77CAE23CF9BC400A08683 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -226,7 +227,6 @@
 		1376D9B523D1A9FD00EE9114 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		1376D9B723D1ED8800EE9114 /* ObservableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableExtensions.swift; sourceTree = "<group>"; };
 		1376D9BC23D1FA6D00EE9114 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
-		1376D9BE23D2211A00EE9114 /* AppProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProxy.swift; sourceTree = "<group>"; };
 		1376D9C023D2214800EE9114 /* AppProxyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProxyProtocol.swift; sourceTree = "<group>"; };
 		1376D9C323D2345900EE9114 /* ArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistModel.swift; sourceTree = "<group>"; };
 		1376D9C523D236DE00EE9114 /* FollowedArtistsNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedArtistsNetworkModel.swift; sourceTree = "<group>"; };
@@ -258,6 +258,8 @@
 		13A61C4A23CF98250045D8E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13C02BAF23D392A3004A5346 /* JsonsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonsMock.swift; sourceTree = "<group>"; };
 		13C02BB223D3A2C0004A5346 /* TestFollowedArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFollowedArtists.swift; sourceTree = "<group>"; };
+		13C02BB423D4BC7D004A5346 /* LightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
+		13C02BB623D4BE1A004A5346 /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArtistsAlbum.swift; sourceTree = "<group>"; };
 		13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationPlatformInjector.swift; sourceTree = "<group>"; };
 		13D77CAC23CF9BC400A08683 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -707,7 +709,6 @@
 			isa = PBXGroup;
 			children = (
 				13D77D7523CFBB0300A08683 /* Vibrator.swift */,
-				1376D9BE23D2211A00EE9114 /* AppProxy.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -918,6 +919,8 @@
 				13D77D2D23CFAD8500A08683 /* ColorsPack.swift */,
 				13D77D3723CFAF2C00A08683 /* FontModel+asUIFont.swift */,
 				13D77D2F23CFAD8500A08683 /* FontsPack.swift */,
+				13C02BB423D4BC7D004A5346 /* LightTheme.swift */,
+				13C02BB623D4BE1A004A5346 /* DarkTheme.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -1559,6 +1562,7 @@
 				13D77D5923CFB72D00A08683 /* Navigator.swift in Sources */,
 				1376D9ED23D2D23000EE9114 /* FollowedUsersItemViewModel.swift in Sources */,
 				1376D9EF23D2D80600EE9114 /* FollowedUsersViewModel.swift in Sources */,
+				13C02BB523D4BC7D004A5346 /* LightTheme.swift in Sources */,
 				13D77D3423CFADDC00A08683 /* AppearanceProvider.swift in Sources */,
 				134B7E2223D2FF5E00D21573 /* ArtistDetailsViewController.swift in Sources */,
 				13D77D7623CFBB0300A08683 /* Vibrator.swift in Sources */,
@@ -1566,7 +1570,6 @@
 				1376D9E123D2D0D900EE9114 /* FollowedUsersNavigator.swift in Sources */,
 				134B7E2723D3275D00D21573 /* ArtistDetailsNavigator.swift in Sources */,
 				13D77D8123D0476400A08683 /* MainTabbarNavigator.swift in Sources */,
-				1376D9BF23D2211A00EE9114 /* AppProxy.swift in Sources */,
 				13D77CA623CF9B8F00A08683 /* ApplicationPlatformInjector.swift in Sources */,
 				13D77D2B23CFAC9F00A08683 /* PopUpCoverViewModel.swift in Sources */,
 				13D77D5423CFB42A00A08683 /* LoginViewController.swift in Sources */,
@@ -1578,6 +1581,7 @@
 				13D77D3E23CFB0CF00A08683 /* UIColor+Hex.swift in Sources */,
 				13D77D3223CFAD8500A08683 /* FontsPack.swift in Sources */,
 				13A61C2723CF98230045D8E9 /* AppDelegate.swift in Sources */,
+				13C02BB723D4BE1B004A5346 /* DarkTheme.swift in Sources */,
 				13D77D5823CFB72D00A08683 /* MainNavigationController.swift in Sources */,
 				13D77D7323CFBAB200A08683 /* AppSoundEffects.swift in Sources */,
 				1376D9EA23D2D19700EE9114 /* FollowedUsersCell.swift in Sources */,

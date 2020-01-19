@@ -9,25 +9,14 @@
 import Foundation
 import UIKit
 
-public class ColorsPack{
-
-    public let backgroundColor: UIColor
-    public let titleTextColor: UIColor
-    public let buttonTextColor: UIColor
-    public let subtitleTextColor: UIColor
-    public let primaryColor: UIColor
-    public let placeHolderTextColor: UIColor
-    public let errorColor: UIColor
-    public let shadowColor: UIColor
-    init() {
-        self.backgroundColor = UIColor.systemBackground
-        self.titleTextColor = UIColor.systemGray
-        self.buttonTextColor = UIColor(hex: Appearance.Colors.white.highest.rawValue, alpha: 1)
-        self.subtitleTextColor = UIColor.label
-        self.primaryColor = UIColor(hex: Appearance.Colors.green.highest.rawValue, alpha: 1)
-        self.placeHolderTextColor = UIColor.systemGray
-        self.errorColor = UIColor(hex: Appearance.Colors.red.pinky.rawValue, alpha: 1)
-        self.shadowColor = UIColor.black
-    }
+protocol ColorsPack {
     
+    var backgroundColor: UIColor { get }
+    var titleTextColor: UIColor { get }
+    var buttonTextColor: UIColor { get }
+    var subtitleTextColor: UIColor { get }
+    var primaryColor: UIColor { get }
+    var placeHolderTextColor: UIColor { get }
+    var errorColor: UIColor { get }
+    var shadowColor: UIColor  { get }
 }

@@ -37,7 +37,7 @@ final class ArtistDetailsViewModel: ViewModelType {
         let activityIndicator = ActivityIndicator()
         
         let loadMore = input.bottomOffset.filter{ $0 == 0.0 }.startWith(0.0).withLatestFrom(requestStream).distinctUntilChanged().flatMapLatest { [unowned self](requestItem) -> Observable<[AlbumItemViewModel]> in
-            self.loadMoreItems(request: requestItem).map{ $0.compactMap{ AlbumItemViewModel(model: $0)}}
+            self.loadMoreItems(request: requestItem).map{ $0.compactMap{ AlbumItemViewModel(model: $0, colors: self.appearance.getColors())}}
         }.trackError(errorTracker).trackActivity(activityIndicator)
         
         let fetching = activityIndicator.asDriver()

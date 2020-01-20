@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import Domain
 final class AppearanceProvider{
      func getColors() -> ColorsPack {
-        return DarkTheme()
+        if UserDefaults.standard.bool(forKey: Constants.Keys.darkMode.rawValue){
+            return DarkTheme()
+        }
+        return LightTheme()
     }
      func getFonts() -> FontsPack {
         return FontsPack()

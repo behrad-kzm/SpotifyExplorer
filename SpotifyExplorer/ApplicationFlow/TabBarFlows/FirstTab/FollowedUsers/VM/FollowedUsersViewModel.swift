@@ -37,7 +37,7 @@ final class FollowedUsersViewModel: ViewModelType {
         let activityIndicator = ActivityIndicator()
         
         let loadMore = input.bottomOffset.filter{ $0 == 0.0 }.startWith(0.0).withLatestFrom(requestStream).distinctUntilChanged().flatMapLatest { [unowned self](requestItem) -> Observable<[FollowedUsersItemViewModel]> in
-            self.loadMoreItems(request: requestItem).map{ $0.compactMap{ FollowedUsersItemViewModel(model: $0)}}
+            self.loadMoreItems(request: requestItem).map{ $0.compactMap{ FollowedUsersItemViewModel(model: $0, colors: self.appearance.getColors())}}
         }.do(onNext: {[unowned self, itemViewModelsStream](newItems) in
             self.itemViewModels.append(contentsOf: newItems)
             itemViewModelsStream.onNext(self.itemViewModels)

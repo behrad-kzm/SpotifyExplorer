@@ -23,7 +23,9 @@ enum Appearance {
         }
         enum white: String {
             case highest = "FFFFFF"
-            case light = "ececec"
+            case light = "F0F0F0"
+            case grayness = "BEBEBE"
+            case shine = "919191"
         }
         enum green: String {
             case highest = "1ed761"
@@ -34,7 +36,7 @@ enum Appearance {
         }
 
         enum dark: String {
-            case black = "000000"
+            case black = "040D24"
             case gray = "121212"
             case lightGray = "9B9B9B"
             case primary = "1F1B24"

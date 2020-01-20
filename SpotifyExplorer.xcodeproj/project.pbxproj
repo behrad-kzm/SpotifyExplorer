@@ -55,7 +55,10 @@
 		13C02BB323D3A2C0004A5346 /* TestFollowedArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB223D3A2C0004A5346 /* TestFollowedArtists.swift */; };
 		13C02BB523D4BC7D004A5346 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB423D4BC7D004A5346 /* LightTheme.swift */; };
 		13C02BB723D4BE1B004A5346 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C02BB623D4BE1A004A5346 /* DarkTheme.swift */; };
+		13C02BBB23D4FB3A004A5346 /* DayNight.json in Resources */ = {isa = PBXBuildFile; fileRef = 13C02BBA23D4FB39004A5346 /* DayNight.json */; };
 		13C8082823D385780070A5D2 /* TestArtistsAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */; };
+		13CD548723D59D1A003C8BA3 /* DaySound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 13CD548623D59D19003C8BA3 /* DaySound.mp3 */; };
+		13CD548923D59D25003C8BA3 /* NightSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 13CD548823D59D25003C8BA3 /* NightSound.mp3 */; };
 		13D77CA623CF9B8F00A08683 /* ApplicationPlatformInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */; };
 		13D77CBE23CF9BC500A08683 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D77CAE23CF9BC400A08683 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13D77CC123CF9BC500A08683 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D77CAC23CF9BC400A08683 /* Domain.framework */; };
@@ -260,7 +263,10 @@
 		13C02BB223D3A2C0004A5346 /* TestFollowedArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFollowedArtists.swift; sourceTree = "<group>"; };
 		13C02BB423D4BC7D004A5346 /* LightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		13C02BB623D4BE1A004A5346 /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
+		13C02BBA23D4FB39004A5346 /* DayNight.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DayNight.json; sourceTree = "<group>"; };
 		13C8082723D385780070A5D2 /* TestArtistsAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArtistsAlbum.swift; sourceTree = "<group>"; };
+		13CD548623D59D19003C8BA3 /* DaySound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DaySound.mp3; sourceTree = "<group>"; };
+		13CD548823D59D25003C8BA3 /* NightSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NightSound.mp3; sourceTree = "<group>"; };
 		13D77CA523CF9B8F00A08683 /* ApplicationPlatformInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationPlatformInjector.swift; sourceTree = "<group>"; };
 		13D77CAC23CF9BC400A08683 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D77CAE23CF9BC400A08683 /* Domain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Domain.h; sourceTree = "<group>"; };
@@ -994,6 +1000,7 @@
 			isa = PBXGroup;
 			children = (
 				134B7E5023D35E4500D21573 /* Empty.json */,
+				13C02BBA23D4FB39004A5346 /* DayNight.json */,
 				13D77D6723CFB80D00A08683 /* Verified.json */,
 			);
 			path = Lotties;
@@ -1010,6 +1017,8 @@
 		13D77D5C23CFB78B00A08683 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				13CD548623D59D19003C8BA3 /* DaySound.mp3 */,
+				13CD548823D59D25003C8BA3 /* NightSound.mp3 */,
 				13D77D6023CFB7CC00A08683 /* ErrorSound.mp3 */,
 				13D77D5E23CFB7CC00A08683 /* SplashSound.mp3 */,
 				13D77D5F23CFB7CC00A08683 /* SuccessSound.mp3 */,
@@ -1295,7 +1304,9 @@
 				1376D9EB23D2D19700EE9114 /* FollowedUsersCell.xib in Resources */,
 				13A61C3023CF98250045D8E9 /* Assets.xcassets in Resources */,
 				13D77D4923CFB34D00A08683 /* SplashViewController.xib in Resources */,
+				13C02BBB23D4FB3A004A5346 /* DayNight.json in Resources */,
 				13D77D2923CFAC9F00A08683 /* PopUpCoverViewController.xib in Resources */,
+				13CD548723D59D1A003C8BA3 /* DaySound.mp3 in Resources */,
 				13D77D6123CFB7CC00A08683 /* SplashSound.mp3 in Resources */,
 				13D77D5223CFB42A00A08683 /* LoginViewController.xib in Resources */,
 				13D77D7D23D0446300A08683 /* LaunchScreen.storyboard in Resources */,
@@ -1303,6 +1314,7 @@
 				13D77D6823CFB80D00A08683 /* Verified.json in Resources */,
 				134B7E5123D35E4600D21573 /* Empty.json in Resources */,
 				134B7E2323D2FF5E00D21573 /* ArtistDetailsViewController.xib in Resources */,
+				13CD548923D59D25003C8BA3 /* NightSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

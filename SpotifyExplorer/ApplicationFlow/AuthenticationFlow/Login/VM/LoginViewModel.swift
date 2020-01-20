@@ -28,7 +28,6 @@ final class LoginViewModel: ViewModelType {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         let action = networkServices.listenToLogin().do(onNext: { [navigator](loggedIn) in
-            
             if !loggedIn {
                 let error = NSError(domain: "Acces denied", code: 401, userInfo: ["message": NSLocalizedString("UserDidNotGrantAccess", comment: "")])
                 navigator.prepareFor(error: error)
@@ -36,7 +35,9 @@ final class LoginViewModel: ViewModelType {
         }).asDriverOnErrorJustComplete().mapToVoid()
         let fetching = activityIndicator.asDriver()
         let errors = errorTracker.asDriver()
-        return Output(isFetching: fetching, action: action, error: errors)
+        let darkMode = BehaviorSubject<Bool>.init(value: false)
+        let darkModeController = input.darkModeTrigger.throttle(RxTimeInterval.seconds(1)).asObservable().map { try !darkMode.value() }.bind(to: darkMode)
+        return Output(isFetching: fetching, action: action, isDarkMode: darkMode.asObservable(), darkModeController: darkModeController, error: errors)
     }
     func verified(){
         navigator.toHome()
@@ -45,10 +46,13 @@ final class LoginViewModel: ViewModelType {
 extension LoginViewModel {
     struct Input {
         let loginTrigger: Driver<Void>
+        let darkModeTrigger: Driver<Void>
     }
     struct Output {
         let isFetching: Driver<Bool>
         let action: Driver<Void>
+        let isDarkMode: Observable<Bool>
+        let darkModeController: Disposable
         let error: Driver<Error>
     }
 }

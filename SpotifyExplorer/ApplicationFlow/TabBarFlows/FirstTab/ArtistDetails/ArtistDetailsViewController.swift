@@ -13,13 +13,15 @@ import RxSwift
 import Lottie
 import RxCocoa
 class ArtistDetailsViewController: UIViewController {
-    
-    @IBOutlet weak var artistsTableView: BEKMultiCellTable!
+
     var viewModel: ArtistDetailsViewModel!
-    @IBOutlet weak var noContentView: UIView!
-    @IBOutlet weak var lottieAnimationContainer: UIView!
-    
+
     //MARK:- Outlets
+        @IBOutlet weak var artistsTableView: BEKMultiCellTable!
+    @IBOutlet weak var noContentView: UIView!
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var lottieAnimationContainer: UIView!
+    @IBOutlet weak var titleHeaderLabel: UILabel!
     @IBOutlet weak var headerBlurView: UIVisualEffectView!
     @IBOutlet weak var headerContainer: UIView!
     
@@ -54,7 +56,10 @@ class ArtistDetailsViewController: UIViewController {
         backgroundBlur.effect = nil
         noContentView.isHidden = true
         mainContainerView.alpha = 0.0
+        mainContainerView.backgroundColor = viewModel.appearance.getColors().backgroundColor
         artistsTableView.rowHeight = 100
+        emptyLabel.textColor = viewModel.appearance.getColors().titleTextColor
+        titleHeaderLabel.textColor = viewModel.appearance.getColors().titleTextColor
     }
     private func setupSizes(){
         artistsTableView.contentInset = UIEdgeInsets(top: artistsTableView.contentInset.top + headerContainer.bounds.height, left: artistsTableView.contentInset.left, bottom: artistsTableView.contentInset.bottom, right: artistsTableView.contentInset.right)

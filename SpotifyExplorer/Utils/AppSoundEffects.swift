@@ -20,6 +20,12 @@ public struct AppSoundEffects {
     public func playVerifySound() {
         play(url: AppEffectSoundsType.verified())
     }
+    public func playDaySound() {
+        play(url: AppEffectSoundsType.dayActivated())
+    }
+    public func playNightSound() {
+        play(url: AppEffectSoundsType.nightActivated())
+    }
     
     private func play(url: URL) {
         var sound: SystemSoundID = 0
@@ -32,5 +38,7 @@ fileprivate enum AppEffectSoundsType {
     public static let splash = { return Bundle.main.url(forResource: "SplashSound", withExtension: "mp3")!}
     public static let error = { return Bundle.main.url(forResource: "ErrorSound", withExtension: "mp3")!}
     public static let verified = { return Bundle.main.url(forResource: "SuccessSound", withExtension: "mp3")!}
+    public static let dayActivated = { return Bundle.main.url(forResource: "DaySound", withExtension: "mp3")!}
+    public static let nightActivated = { return Bundle.main.url(forResource: "NightSound", withExtension: "mp3")!}
 }
 

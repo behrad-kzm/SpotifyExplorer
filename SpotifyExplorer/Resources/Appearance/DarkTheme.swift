@@ -20,13 +20,14 @@ class DarkTheme: ColorsPack {
     let shadowColor: UIColor
     
     init() {
-        self.backgroundColor = UIColor.black
-        self.titleTextColor = UIColor.white
-        self.buttonTextColor = UIColor(hex: Appearance.Colors.white.highest.rawValue, alpha: 1)
-        self.subtitleTextColor = UIColor.label
+        self.backgroundColor = UIColor(hex: Appearance.Colors.dark.black.rawValue, alpha: 1)
+        self.titleTextColor = UIColor(hex: Appearance.Colors.white.light.rawValue, alpha: 1)
+        self.buttonTextColor = UIColor(hex: Appearance.Colors.white.light.rawValue, alpha: 1)
+        self.subtitleTextColor = UIColor(hex: Appearance.Colors.white.grayness.rawValue, alpha: 1)
         self.primaryColor = UIColor(hex: Appearance.Colors.green.highest.rawValue, alpha: 1)
-        self.placeHolderTextColor = UIColor.systemGray
+        self.placeHolderTextColor = UIColor(hex: Appearance.Colors.white.grayness.rawValue, alpha: 1)
         self.errorColor = UIColor(hex: Appearance.Colors.red.pinky.rawValue, alpha: 1)
-        self.shadowColor = UIColor.black
+        self.shadowColor = UIColor(hex: Appearance.Colors.white.shine.rawValue, alpha: 1)
     }
+
 }

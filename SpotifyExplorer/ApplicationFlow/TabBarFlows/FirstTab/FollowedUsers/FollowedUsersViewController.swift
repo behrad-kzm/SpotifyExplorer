@@ -13,10 +13,11 @@ import RxSwift
 import RxCocoa
 class FollowedUsersViewController: UIViewController {
     
-    @IBOutlet weak var artistsTableView: BEKMultiCellTable!
     var viewModel: FollowedUsersViewModel!
     
     //MARK:- Outlets
+        @IBOutlet weak var artistsTableView: BEKMultiCellTable!
+    @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var headerBlurView: UIVisualEffectView!
     @IBOutlet weak var headerContainer: UIView!
     let disposeBag = DisposeBag()
@@ -38,7 +39,8 @@ class FollowedUsersViewController: UIViewController {
     }
     private func setupUI(){
         artistsTableView.rowHeight = 80
-        
+        view.backgroundColor = viewModel.appearance.getColors().backgroundColor
+        headerTitleLabel.textColor = viewModel.appearance.getColors().titleTextColor
     }
     private func setupSizes(){
         artistsTableView.contentInset = UIEdgeInsets(top: artistsTableView.contentInset.top + headerContainer.bounds.height, left: artistsTableView.contentInset.left, bottom: artistsTableView.contentInset.bottom, right: artistsTableView.contentInset.right)

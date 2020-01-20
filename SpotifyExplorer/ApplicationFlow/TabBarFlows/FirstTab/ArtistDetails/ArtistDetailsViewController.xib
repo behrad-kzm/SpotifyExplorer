@@ -12,11 +12,13 @@
                 <outlet property="artistsTableView" destination="Yfa-oP-sc4" id="FOo-r0-QDY"/>
                 <outlet property="backgroundBlur" destination="ZpM-p0-yBK" id="ltd-BT-NUU"/>
                 <outlet property="closeButton" destination="dIk-lE-R3o" id="ufI-FX-imn"/>
+                <outlet property="emptyLabel" destination="rQl-Wh-5gF" id="3Bv-sj-VJM"/>
                 <outlet property="headerBlurView" destination="DLa-BX-Xu4" id="rRn-PS-75B"/>
                 <outlet property="headerContainer" destination="g1m-3F-bGY" id="SPu-z9-ZTl"/>
                 <outlet property="lottieAnimationContainer" destination="hnu-d2-Z40" id="eZ5-Mk-hDa"/>
                 <outlet property="mainContainerView" destination="SaK-NT-My8" id="IVT-Yh-THx"/>
                 <outlet property="noContentView" destination="crl-DW-GEm" id="ikx-T8-6Ym"/>
+                <outlet property="titleHeaderLabel" destination="67D-eG-Lmu" id="M2H-kb-XH8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -50,7 +52,7 @@
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-oP-sc4" customClass="BEKMultiCellTable" customModule="BEKMultiCellTable">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="786"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-gh-Hkp">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="68"/>
@@ -103,13 +105,18 @@
                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crl-DW-GEm">
                             <rect key="frame" x="3" y="68" width="375" height="658"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnu-d2-Z40">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnu-d2-Z40">
                                     <rect key="frame" x="62.5" y="204" width="250" height="250"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="hnu-d2-Z40" secondAttribute="height" multiplier="1:1" id="ifz-Na-R7u"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="sxY-9I-nSb"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="32"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sounds like empty!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQl-Wh-5gF">
                                     <rect key="frame" x="62.5" y="470" width="250" height="25.5"/>
@@ -118,7 +125,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="hnu-d2-Z40" firstAttribute="centerY" secondItem="crl-DW-GEm" secondAttribute="centerY" id="K37-IO-MCG"/>
                                 <constraint firstItem="rQl-Wh-5gF" firstAttribute="top" secondItem="hnu-d2-Z40" secondAttribute="bottom" constant="16" id="SWn-Mw-IUb"/>

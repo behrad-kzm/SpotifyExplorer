@@ -24,15 +24,14 @@
                         <rect key="frame" x="16" y="8" width="502" height="181"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dck-I6-PRP">
-                                <rect key="frame" x="-844" y="-411.5" width="1004" height="1004"/>
+                                <rect key="frame" x="-196" y="-155.5" width="356" height="356"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="ArtistPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="afk-8P-05F">
-                                        <rect key="frame" x="844" y="411.5" width="160" height="181"/>
+                                        <rect key="frame" x="196" y="155.5" width="160" height="181"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="1004" id="iRA-Nt-qDW"/>
                                     <constraint firstAttribute="trailing" secondItem="afk-8P-05F" secondAttribute="trailing" id="j5U-TG-TPP"/>
                                     <constraint firstAttribute="width" secondItem="Dck-I6-PRP" secondAttribute="height" multiplier="1:1" id="ooL-df-Ein"/>
                                 </constraints>
@@ -60,7 +59,7 @@
                             <constraint firstItem="UWr-Ro-j8p" firstAttribute="leading" secondItem="Dck-I6-PRP" secondAttribute="trailing" constant="8" id="4FI-bj-UOL"/>
                             <constraint firstItem="afk-8P-05F" firstAttribute="top" secondItem="E5L-FK-2ZE" secondAttribute="top" id="6d5-wE-QpG"/>
                             <constraint firstAttribute="trailing" secondItem="UWr-Ro-j8p" secondAttribute="trailing" constant="8" id="HCc-XS-oMA"/>
-                            <constraint firstItem="Dck-I6-PRP" firstAttribute="centerY" secondItem="E5L-FK-2ZE" secondAttribute="centerY" id="XtB-yA-U0D"/>
+                            <constraint firstItem="Dck-I6-PRP" firstAttribute="centerY" secondItem="E5L-FK-2ZE" secondAttribute="centerY" multiplier="1:4" id="XtB-yA-U0D"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UWr-Ro-j8p" secondAttribute="bottom" constant="8" id="ZVS-yC-FXD"/>
                             <constraint firstAttribute="bottom" secondItem="afk-8P-05F" secondAttribute="bottom" id="apn-S8-0C9"/>
                             <constraint firstItem="afk-8P-05F" firstAttribute="leading" secondItem="E5L-FK-2ZE" secondAttribute="leading" id="iir-gJ-4NQ"/>
@@ -83,6 +82,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="afk-8P-05F" firstAttribute="width" secondItem="DHy-hO-7U9" secondAttribute="width" multiplier="3:10" id="H9X-AB-h9H"/>
+                <constraint firstItem="Dck-I6-PRP" firstAttribute="width" secondItem="DHy-hO-7U9" secondAttribute="width" multiplier="2:3" id="M4C-Du-Laq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="PaT-gH-4Zx"/>
             <connections>

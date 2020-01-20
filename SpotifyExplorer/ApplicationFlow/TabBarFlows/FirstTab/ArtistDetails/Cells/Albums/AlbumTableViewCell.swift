@@ -12,17 +12,15 @@ import Domain
 import BEKMultiCellTable
 import SDWebImage
 class AlbumTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var shadowMaskView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var imageContainer: UIView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
+    var viewModel: AlbumItemViewModel?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setupUI()
@@ -32,24 +30,30 @@ class AlbumTableViewCell: UITableViewCell {
         [shadowMaskView, containerView, profileImageView].forEach { (item) in
             item?.layoutIfNeeded()
         }
+        shadowMaskView.superview?.layoutIfNeeded()
         let radius = containerView.frame.size.height / 2
-        shadowMaskView.dropShadow(color: .black, opacity: 0.3, offSet: CGSize(width: 0, height: 0), radius: radius, shadowRadius: 4, scale: true)
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
+        if let safeViewModel = viewModel{
+            shadowMaskView.dropShadow(color: safeViewModel.colors.shadowColor, opacity: 1.0, offSet: CGSize(width: 0, height: 0), radius: radius, shadowRadius: 4, scale: true)
+        }
         imageContainer.layer.cornerRadius = imageContainer.bounds.height / 2
         profileImageView.clipsToBounds = true
         containerView.layer.cornerRadius = radius
         containerView.clipsToBounds = true
-        profileImageView.layer.borderWidth = 0.5
-        profileImageView.layer.borderColor = UIColor.lightGray.cgColor
     }
 }
 
 extension AlbumTableViewCell: BEKBindableCell {
-
+    
     typealias ViewModelType = AlbumItemViewModel
     func bindData(withViewModel viewModel: AlbumItemViewModel) {
+        self.viewModel = viewModel
         titleLabel.text = viewModel.title
         genreLabel.text = viewModel.artists
+        layoutSubviews()
+        titleLabel.textColor = viewModel.colors.titleTextColor
+        genreLabel.textColor = viewModel.colors.subtitleTextColor
+        containerView.backgroundColor = viewModel.colors.backgroundColor
+        
         if let url = URL(string: viewModel.profileImagePath) {
             profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "ArtistPlaceHolder"), options: [.continueInBackground], completed: nil)
             return

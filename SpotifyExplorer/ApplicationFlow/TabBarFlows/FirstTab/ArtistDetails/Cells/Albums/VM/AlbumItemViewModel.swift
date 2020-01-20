@@ -14,9 +14,10 @@ public struct AlbumItemViewModel {
     let profileImagePath: String
     let title: String
     let artists: String
-    
-    init(model: AlbumsInfoItemModel) {
+    let colors: ColorsPack
+    init(model: AlbumsInfoItemModel, colors: ColorsPack) {
         self.model = model
+        self.colors = colors
         self.title = model.name
         let mixedArtists = model.artists.reduce("", { (previous, item) -> String in
             return "\(previous) - \(item.name)"

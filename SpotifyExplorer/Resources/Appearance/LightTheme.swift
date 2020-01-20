@@ -8,7 +8,7 @@
 
 import UIKit
 
- class LightTheme{
+class LightTheme: ColorsPack{
 
      let backgroundColor: UIColor
      let titleTextColor: UIColor
@@ -20,13 +20,13 @@ import UIKit
      let shadowColor: UIColor
     
     init() {
-        self.backgroundColor = UIColor.systemBackground
-        self.titleTextColor = UIColor.systemGray
+        self.backgroundColor = UIColor(hex: Appearance.Colors.white.highest.rawValue, alpha: 1)
+        self.titleTextColor = UIColor(hex: Appearance.Colors.dark.gray.rawValue, alpha: 1)
         self.buttonTextColor = UIColor(hex: Appearance.Colors.white.highest.rawValue, alpha: 1)
-        self.subtitleTextColor = UIColor.label
+        self.subtitleTextColor = UIColor(hex: Appearance.Colors.dark.lightGray.rawValue, alpha: 1)
         self.primaryColor = UIColor(hex: Appearance.Colors.green.highest.rawValue, alpha: 1)
         self.placeHolderTextColor = UIColor.systemGray
         self.errorColor = UIColor(hex: Appearance.Colors.red.pinky.rawValue, alpha: 1)
-        self.shadowColor = UIColor.black
+        self.shadowColor = UIColor(hex: Appearance.Colors.dark.black.rawValue, alpha: 1)
     }
 }

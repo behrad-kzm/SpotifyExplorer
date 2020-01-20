@@ -14,9 +14,11 @@ public struct FollowedUsersItemViewModel {
     let profileImagePath: String
     let title: String
     let genre: String
+    let colors: ColorsPack
     
-    init(model: ArtistModel) {
+    init(model: ArtistModel, colors: ColorsPack) {
         self.artist = model
+        self.colors = colors
         self.title = model.name
         let mixedGenres = model.genres.reduce("", { (previous, item) -> String in
             return "\(previous) - \(item)"

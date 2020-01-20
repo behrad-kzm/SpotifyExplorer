@@ -12,6 +12,7 @@
                 <outlet property="artistsTableView" destination="4Ly-r2-phF" id="dfq-mV-QAC"/>
                 <outlet property="headerBlurView" destination="wl8-2D-v8I" id="poy-05-qYI"/>
                 <outlet property="headerContainer" destination="GaY-lC-WsR" id="bTB-4p-bsb"/>
+                <outlet property="headerTitleLabel" destination="Ml8-kV-6Ib" id="rtX-Jm-uE1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

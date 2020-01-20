@@ -12,10 +12,10 @@ public enum Constants {
 	public enum Keys: String {
 		//MARK: - Schedulers name
 		case cacheSchedulerQueueName = "com.bekapps.Network.Cache.queue"
-		case realmRepository = "com.bekapps.RealmPlatform.Repository"
         
         //MARK: - Key name
-        case useDefaults = "com.bekapps.RealmPlatform.UseDefaults"
+        case useDefaults = "com.bekapps.UseDefaults"
+        case darkMode = "com.bekapps.darkMode"
 		//MARK: - Storage Keys
         public enum Authentication: String {
             case accessToken = "com.bekapps.storagekeys.authentication.token.access"
